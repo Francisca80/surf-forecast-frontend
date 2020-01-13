@@ -31,7 +31,7 @@ class App extends Component<{}, State> {
 
   render() {
     const { newBeachbreak, beachbreaks } = this.state;
-    
+
     return (
       <div className="App">
         <h2>Beachbreak List</h2>
@@ -40,10 +40,11 @@ class App extends Component<{}, State> {
           onAdd={this.addBeachbreak}
           onChange={this.handleBeachbreakChange}
         />
-        <BeachbreakList
+        {beachbreaks && <BeachbreakList
           beachbreaks={beachbreaks}
           onDelete={this.deleteBeachbreak}
-        />
+        />}
+
         <Map />
       </div>
     );
