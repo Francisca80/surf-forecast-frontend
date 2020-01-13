@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import { NewBeachbreakForm } from "./components/NewBeachbreakForm";
 import { Beachbreak } from "./models/beachbreak";
 import { BeachbreakList } from "./components/BeachbreakList";
+import { Map } from "./components/Map";
 import "./App.css";
 
 interface State {
@@ -32,6 +33,7 @@ class App extends Component <{}, State> {
           beachbreaks={this.state.beachbreaks}
           onDelete={this.deleteBeachbreak}
         />
+        <Map/>
       </div>
     );
   }
