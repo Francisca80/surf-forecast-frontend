@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 
+import request from "superagent";
+
 import { NewBeachbreakForm } from "./components/NewBeachbreakForm";
 import { Beachbreak } from "./models/beachbreak";
 import { BeachbreakList } from "./components/BeachbreakList";
@@ -11,7 +13,7 @@ interface State {
   beachbreaks: Beachbreak[];
 }
 
-class App extends Component <{}, State> {
+class App extends Component<{}, State> {
   state = {
     newBeachbreak: {
       id: 1,
@@ -20,20 +22,29 @@ class App extends Component <{}, State> {
     beachbreaks: []
   };
 
+  componentDidMount() {
+    request
+      .get("http://localhost:8080/beaches")
+      .then((res: any) => this.setState({ beachbreaks: res.body }))
+      .catch(e => console.warn(e))
+  }
+
   render() {
+    const { newBeachbreak, beachbreaks } = this.state;
+    
     return (
       <div className="App">
         <h2>Beachbreak List</h2>
         <NewBeachbreakForm
-          beachbreak={this.state.newBeachbreak}
+          beachbreak={newBeachbreak}
           onAdd={this.addBeachbreak}
           onChange={this.handleBeachbreakChange}
         />
         <BeachbreakList
-          beachbreaks={this.state.beachbreaks}
+          beachbreaks={beachbreaks}
           onDelete={this.deleteBeachbreak}
         />
-        <Map/>
+        <Map />
       </div>
     );
   }
@@ -66,7 +77,7 @@ class App extends Component <{}, State> {
           beachbreak => beachbreak.id !== beachbreakToDelete.id
         )
       ]
-    }));  
+    }));
   };
 }
 

@@ -8,10 +8,12 @@ interface Props {
     onDelete: (beachbreaks: Beachbreak) => void;
 }
 
-export const BeachbreakList: FunctionComponent<Props> = ({ beachbreaks, onDelete }) => (
-    <ul>
-        {beachbreaks.map(beachbreak => (
-            <BeachbreakListItem beachbreak={beachbreak} onDelete={onDelete} />
-        ))}
-    </ul>
-);
+export const BeachbreakList: FunctionComponent<Props> = ({ beachbreaks, onDelete }) => {
+    return (
+        <ul>
+            {beachbreaks.map(beachbreak => (
+                <BeachbreakListItem key={beachbreak.id} beachbreak={beachbreak} onDelete={onDelete} />
+            ))}
+        </ul>
+    );
+};
