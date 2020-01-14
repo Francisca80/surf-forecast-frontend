@@ -8,13 +8,13 @@ export interface Props {
 
 export const BeachbreakListItem: 
 FunctionComponent<Props> = ({ beachbreak, onDelete }) => {
-    const onClick = () => {
+    const deleteBeach = () => {
         onDelete(beachbreak);
     };
 
     return (
         <li>
-            {beachbreak.name} <button onClick={onClick}>X</button>
+            {beachbreak.name} <button onClick={deleteBeach}>X</button>
         </li>
     );
 };

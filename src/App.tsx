@@ -12,6 +12,8 @@ import "./App.css";
 interface State {
   newBeachbreak: Beachbreak;
   beachbreaks: Beachbreak[];
+  latitude: number;
+  longitude: number;
 }
 
 class App extends Component<{}, State> {
@@ -19,9 +21,12 @@ class App extends Component<{}, State> {
     newBeachbreak: {
       id: 1,
       name: "",
-      location: ""
+      latitude: 0,
+      longitude: 0
     },
-    beachbreaks: []
+    beachbreaks: [],
+    latitude: 0,
+    longitude: 0
   };
 
   componentDidMount() {
@@ -31,8 +36,52 @@ class App extends Component<{}, State> {
       .catch(e => console.warn(e))
   }
 
+  private addBeachbreak = (event: React.FormEvent<HTMLFormElement>) => {
+    const index = this.state.beachbreaks.length - 1;
+    const bla: any = this.state.beachbreaks[index]
+    event.preventDefault();
+    request
+      .post(baseUrl)
+      .send(this.state.newBeachbreak)
+      .then(() => this.setState(previousState => ({
+        newBeachbreak: {
+          id: bla.id + 1,
+          name: "",
+          latitude: 0,
+          longitude: 0
+        },
+        beachbreaks: [...previousState.beachbreaks, previousState.newBeachbreak]
+      })))
+      .catch(e => console.warn(e));
+  };
+
+  private handleBeachbreakChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({
+      newBeachbreak: {
+        ...this.state.newBeachbreak,
+        name: event.target.value,
+        latitude: 0,
+        longitude: 0
+      }
+    });
+  };
+
+  private deleteBeachbreak = (beachbreakToDelete: Beachbreak) => {
+    console.log(beachbreakToDelete)
+    request
+      .delete(`${baseUrl}/${beachbreakToDelete.id}`)
+      .then(() => this.setState(previousState => ({
+        beachbreaks: [
+          ...previousState.beachbreaks.filter(
+            beachbreak => beachbreak.id !== beachbreakToDelete.id
+          )
+        ]
+      })))
+      .catch(e => console.warn(e))
+  };
+
   render() {
-    const { newBeachbreak, beachbreaks } = this.state;
+    const { newBeachbreak, beachbreaks, latitude, longitude } = this.state;
 
     return (
       <div className="App">
@@ -51,43 +100,6 @@ class App extends Component<{}, State> {
       </div>
     );
   }
-
-  private addBeachbreak = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    request
-      .post(baseUrl)
-      .send(this.state.newBeachbreak)
-      .then(() => this.setState(previousState => ({
-        newBeachbreak: {
-          id: previousState.newBeachbreak.id + 1,
-          name: ""
-        },
-        beachbreaks: [...previousState.beachbreaks, previousState.newBeachbreak]
-      })))
-      .catch(e => console.warn(e));
-  };
-
-  private handleBeachbreakChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    this.setState({
-      newBeachbreak: {
-        ...this.state.newBeachbreak,
-        name: event.target.value
-      }
-    });
-  };
-
-  private deleteBeachbreak = (beachbreakToDelete: Beachbreak) => {
-    request
-      .delete(`${baseUrl}/${beachbreakToDelete.id}`)
-      .then(() => this.setState(previousState => ({
-        beachbreaks: [
-          ...previousState.beachbreaks.filter(
-            beachbreak => beachbreak.id !== beachbreakToDelete.id
-          )
-        ]
-      })))
-      .catch(e => console.warn(e))
-  };
 }
 
 export default App;
