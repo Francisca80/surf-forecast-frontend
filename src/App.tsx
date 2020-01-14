@@ -72,13 +72,16 @@ class App extends Component<{}, State> {
   };
 
   private deleteBeachbreak = (beachbreakToDelete: Beachbreak) => {
-    this.setState(previousState => ({
+    request
+    .delete(`http://localhost:8080/beaches/${beachbreakToDelete.id}`)
+    .then(() =>     this.setState(previousState => ({
       beachbreaks: [
         ...previousState.beachbreaks.filter(
           beachbreak => beachbreak.id !== beachbreakToDelete.id
         )
       ]
-    }));
+    })))
+    .catch(e => console.warn(e))
   };
 }
 
