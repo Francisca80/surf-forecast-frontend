@@ -14,8 +14,8 @@ import 'mapbox-gl/dist/mapbox-gl.css'
     return (
            
             <ReactMapGL {...viewport}
-            width="100vw"
-            height="100vh"
+            width="40vw"
+            height="40vh"
             mapStyle= "mapbox://styles/mapbox/outdoors-v11"
             mapboxApiAccessToken={"pk.eyJ1IjoiZnJhbmNpc2NhODB2bSIsImEiOiJjazVjZnp3eTExNmowM2xwa3pieGJ1cDRpIn0.dXkJ6CzxbkcrqWK0Ij7xYA"}
            
