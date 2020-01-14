@@ -81,7 +81,7 @@ class App extends Component<{}, State> {
   };
 
   render() {
-    const { newBeachbreak, beachbreaks, latitude, longitude } = this.state;
+    const { newBeachbreak, beachbreaks } = this.state;
 
     return (
       <div className="App">
