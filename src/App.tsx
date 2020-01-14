@@ -6,6 +6,7 @@ import { NewBeachbreakForm } from "./components/NewBeachbreakForm";
 import { Beachbreak } from "./models/beachbreak";
 import { BeachbreakList } from "./components/BeachbreakList";
 import { Map } from "./components/Map";
+import { baseUrl } from "./constants";
 import "./App.css";
 
 interface State {
@@ -17,15 +18,16 @@ class App extends Component<{}, State> {
   state = {
     newBeachbreak: {
       id: 1,
-      name: ""
+      name: "",
+      location: ""
     },
     beachbreaks: []
   };
 
   componentDidMount() {
     request
-      .get("http://localhost:8080/beaches")
-      .then((res: any) => this.setState({ beachbreaks: res.body }))
+      .get(baseUrl)
+      .then(res => this.setState({ beachbreaks: res.body }))
       .catch(e => console.warn(e))
   }
 
@@ -52,14 +54,17 @@ class App extends Component<{}, State> {
 
   private addBeachbreak = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-
-    this.setState(previousState => ({
-      newBeachbreak: {
-        id: previousState.newBeachbreak.id + 1,
-        name: ""
-      },
-      beachbreaks: [...previousState.beachbreaks, previousState.newBeachbreak]
-    }));
+    request
+      .post(baseUrl)
+      .send(this.state.newBeachbreak)
+      .then(() => this.setState(previousState => ({
+        newBeachbreak: {
+          id: previousState.newBeachbreak.id + 1,
+          name: ""
+        },
+        beachbreaks: [...previousState.beachbreaks, previousState.newBeachbreak]
+      })))
+      .catch(e => console.warn(e));
   };
 
   private handleBeachbreakChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -72,13 +77,16 @@ class App extends Component<{}, State> {
   };
 
   private deleteBeachbreak = (beachbreakToDelete: Beachbreak) => {
-    this.setState(previousState => ({
-      beachbreaks: [
-        ...previousState.beachbreaks.filter(
-          beachbreak => beachbreak.id !== beachbreakToDelete.id
-        )
-      ]
-    }));
+    request
+      .delete(`${baseUrl}/${beachbreakToDelete.id}`)
+      .then(() => this.setState(previousState => ({
+        beachbreaks: [
+          ...previousState.beachbreaks.filter(
+            beachbreak => beachbreak.id !== beachbreakToDelete.id
+          )
+        ]
+      })))
+      .catch(e => console.warn(e))
   };
 }
 
