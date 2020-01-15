@@ -14,12 +14,14 @@ export const NewBeachbreakForm: FunctionComponent<Props> = ({
   onAdd,
   beachbreak
 }) => (
-
-    <form onSubmit={onAdd}>
+    <div className="addBeachbreak">
+     <form onSubmit={onAdd}>
       <input onChange={onChange} value={beachbreak.name} />
-      <Button variant="contained" color="primary" type="submit">
+      <Button variant="contained" color="primary" type="submit" >
         Add Beachbreak
       </Button>
+   
     </form>
+    </div>
 
 );
