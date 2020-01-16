@@ -90,7 +90,6 @@ class App extends Component<{}, State> {
    
       <div className="App">
         <Appbar />
-        <h2>Beachbreak List</h2>
         <NewBeachbreakForm
           beachbreak={newBeachbreak}
           onAdd={this.addBeachbreak}

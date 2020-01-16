@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from "react";
 import Button from "@material-ui/core/Button";
 import { Beachbreak } from "../models/beachbreak";
-
+import { TextField } from "@material-ui/core";
 
 interface Props {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
@@ -14,14 +14,26 @@ export const NewBeachbreakForm: FunctionComponent<Props> = ({
   onAdd,
   beachbreak
 }) => (
-    <div className="addBeachbreak">
-     <form onSubmit={onAdd}>
-      <input onChange={onChange} value={beachbreak.name} />
-      <Button variant="contained" color="primary" type="submit" >
-        Add Beachbreak
+  <div className="addBeachbreak">
+    <form onSubmit={onAdd}>
+      <TextField
+        id="outlined-size-small"
+        label="Beach"
+        variant="outlined"
+        size="small"
+        onChange={onChange}
+        value={beachbreak.name}
+      />
+      <Button
+        className="goRight"
+        variant="contained"
+        color="primary"
+        aria-label="add"
+        size="medium"
+        type="submit"
+      >
+        Add
       </Button>
-   
     </form>
-    </div>
-
+  </div>
 );
