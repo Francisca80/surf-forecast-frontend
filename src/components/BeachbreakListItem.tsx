@@ -10,6 +10,7 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 
 export interface Props {
   beachbreak: Beachbreak;
+  
   onDelete: (beachbreak: Beachbreak) => void;
 }
 
@@ -22,14 +23,14 @@ export const BeachbreakListItem: FunctionComponent<Props> = ({
   };
 
   return (
-    <ListItem button>
+    <ListItem button onClick={() => { console.log(beachbreak.latitude, beachbreak.longitude) }} >
       <ListItemIcon>
         <WavesIcon />
       </ListItemIcon>
       <ListItemText primary={beachbreak.name} />
       <ListItemSecondaryAction>
-        <IconButton edge="end" aria-label="delete">
-          <DeleteIcon fontSize="small" onClick={deleteBeach} />
+        <IconButton edge="end" aria-label="delete" onClick={deleteBeach}>
+          <DeleteIcon fontSize="small" />
         </IconButton>
       </ListItemSecondaryAction>
     </ListItem>
