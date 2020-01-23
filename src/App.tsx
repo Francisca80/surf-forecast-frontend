@@ -85,11 +85,12 @@ class App extends Component<{}, State> {
 
     return (
       <div className="App">
-        <h2>Beachbreak List</h2>
+        <h2 className="title">Overview</h2>
         <NewBeachbreakForm
           beachbreak={newBeachbreak}
           onAdd={this.addBeachbreak}
           onChange={this.handleBeachbreakChange}
+          
         />
         {beachbreaks && <BeachbreakList
           beachbreaks={beachbreaks}

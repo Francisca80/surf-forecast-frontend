@@ -1,6 +1,8 @@
 import React, { FunctionComponent } from "react";
-import Button from "@material-ui/core/Button";
+import Fab from "@material-ui/core/Fab";
+import AddIcon from '@material-ui/icons/Add';
 import { Beachbreak } from "../models/beachbreak";
+import { TextField, withStyles } from "@material-ui/core";
 
 
 interface Props {
@@ -9,17 +11,32 @@ interface Props {
   beachbreak: Beachbreak;
 }
 
+const StyledFab = withStyles({
+  root: {
+    backgroundColor: 'white',
+  },
+  // colorInherit: {backgroundColor: 'white'}
+})(Fab);
+
+const StyledIcon = withStyles({
+  root: {
+    color: 'rgb(45, 155, 136)'
+  }
+})(AddIcon);
+
 export const NewBeachbreakForm: FunctionComponent<Props> = ({
   onChange,
   onAdd,
   beachbreak
 }) => (
-
     <form onSubmit={onAdd}>
-      <input onChange={onChange} value={beachbreak.name} />
-      <Button variant="contained" color="primary" type="submit">
+      <TextField onChange={onChange} value={beachbreak.name} id="beachbreak" label="Standard"/>
+      {/* <Button variant="contained" color="primary" type="submit">
         Add Beachbreak
-      </Button>
+      </Button> */}
+      <StyledFab color="primary" aria-label="add" type="submit" className="styled-fab">
+        <StyledIcon />
+      </StyledFab>
     </form>
 
-);
+  );
