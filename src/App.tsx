@@ -13,8 +13,8 @@ import Appbar from './components/Appbar';
 interface State {
   newBeachbreak: Beachbreak;
   beachbreaks: Beachbreak[];
-  latitude: number;
-  longitude: number;
+  latitude: string;
+  longitude: string;
 }
 
 class App extends Component<{}, State> {
@@ -22,19 +22,37 @@ class App extends Component<{}, State> {
     newBeachbreak: {
       id: 1,
       name: "",
-      latitude: 0,
-      longitude: 0
+      latitude: "",
+      longitude: ""
     },
     beachbreaks: [],
-    latitude: 0,
-    longitude: 0
+    latitude: "",
+    longitude: ""
   };
 
+  mockData = [
+    {
+      id: 1,
+      name: "Guincho",
+      latitude: "38.7325",
+      longitude: "9.4725",
+      waveheightvalue: 1.66
+    },
+    {
+      id: 2,
+      name: "Peniche",
+      latitude: "38.7325",
+      longitude: "9.4725",
+      waveheightvalue: 1.70
+    }
+  ]
+
   componentDidMount() {
-    request
-      .get(baseUrl)
-      .then(res => this.setState({ beachbreaks: res.body }))
-      .catch(e => console.warn(e))
+    this.setState({ beachbreaks: this.mockData })
+    // request
+    //   .get(baseUrl)
+    //   .then(res => this.setState({ beachbreaks: res.body }))
+    //   .catch(e => console.warn(e))
   }
 
 
@@ -50,8 +68,8 @@ class App extends Component<{}, State> {
         newBeachbreak: {
           id: bla.id + 1,
           name: "",
-          latitude: 0,
-          longitude: 0
+          latitude: "",
+          longitude: ""
         },
         beachbreaks: [...previousState.beachbreaks, previousState.newBeachbreak]
       })))
@@ -63,8 +81,8 @@ class App extends Component<{}, State> {
       newBeachbreak: {
         ...this.state.newBeachbreak,
         name: event.target.value,
-        latitude: 0,
-        longitude: 0
+        latitude: "",
+        longitude: ""
       }
     });
   };
@@ -84,16 +102,18 @@ class App extends Component<{}, State> {
   };
 
   render() {
-    const { newBeachbreak, beachbreaks, latitude, longitude } = this.state;
+    const { newBeachbreak, beachbreaks } = this.state;
 
     return (
    
       <div className="App">
-        <Appbar />
+        <h2 className="title">Overview</h2>
+
         <NewBeachbreakForm
           beachbreak={newBeachbreak}
           onAdd={this.addBeachbreak}
           onChange={this.handleBeachbreakChange}
+
         />
         {beachbreaks && <BeachbreakList
           beachbreaks={beachbreaks}
