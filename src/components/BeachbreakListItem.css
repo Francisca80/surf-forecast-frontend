@@ -1,0 +1,17 @@
+.container {
+    margin-bottom: 10px;
+}
+
+p {
+    position: relative;
+    z-index: 2;
+    overflow: scroll;
+    bottom: 60px;
+    left: 12px;
+    color: white;
+    font-weight: 600;
+}
+
+img {
+    z-index: 1;
+}
