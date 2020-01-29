@@ -1,5 +1,7 @@
 import React, { FunctionComponent } from "react";
 import { Beachbreak } from "../models/beachbreak";
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
 
 export interface Props {
     beachbreak: Beachbreak;
@@ -13,8 +15,11 @@ FunctionComponent<Props> = ({ beachbreak, onDelete }) => {
     };
 
     return (
-        <li>
-            {beachbreak.name} <button onClick={deleteBeach}>X</button>
-        </li>
+        <ListItem>
+            <ListItemText>
+            {beachbreak.name}
+            </ListItemText>
+             <button onClick={deleteBeach}>X</button>
+        </ListItem>
     );
 };
