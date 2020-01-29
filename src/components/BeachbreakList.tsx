@@ -12,7 +12,7 @@ interface Props {
 const useStyles = makeStyles(theme => ({
   root: {
     width: '100%',
-    maxWidth: 360,
+    maxWidth: 550,
     backgroundColor: theme.palette.background.paper,
     margin: "0 auto",
     marginBottom: "30px",
@@ -30,6 +30,7 @@ export const BeachbreakList: FunctionComponent<Props> = ({ beachbreaks, onDelete
         <List>
             {beachbreaks.map(beachbreak => (
                 <BeachbreakListItem key={beachbreak.id} beachbreak={beachbreak} onDelete={onDelete} />
+                
             ))}
         </List>
         </div>
