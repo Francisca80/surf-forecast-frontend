@@ -17,6 +17,7 @@ interface State {
   longitude: string;
 }
 
+
 class App extends Component<{}, State> {
   state = {
     newBeachbreak: {

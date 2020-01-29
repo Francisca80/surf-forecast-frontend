@@ -15,6 +15,7 @@
     "@types/react-map-gl": "^5.1.0",
     "@types/superagent": "^4.1.4",
     "deck.gl": "^8.0.7",
+    "express": "^4.17.1",
     "mapbox-gl": "^1.6.1",
     "material-ui-country-flags": "^3.0.1",
     "react": "^16.12.0",
