@@ -27,8 +27,8 @@
   text-shadow: 2px 2px 4px rgb(45, 155, 136);
   /* transform: translate3d(-50%,-50%,0); */
   align-items: flex-start;
-  background-color: whitesmoke;
-  margin-top: 1rem;
+  /* background-color: whitesmoke; */
+  /* margin-top: 1rem; */
 }
 
 .beachbreakList {

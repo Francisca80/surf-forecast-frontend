@@ -29,15 +29,16 @@ export const NewBeachbreakForm: FunctionComponent<Props> = ({
   onAdd,
   beachbreak
 }) => (
-    <form onSubmit={onAdd}>
-      <TextField onChange={onChange} value={beachbreak.name} id="beachbreak" label="Standard"/>
-      {/* <Button variant="contained" color="primary" type="submit">
+    <div style={{margin: "0 auto", width: "fit-content"}}>
+      <form onSubmit={onAdd}>
+        <TextField onChange={onChange} value={beachbreak.name} id="beachbreak" label="Standard" />
+        {/* <Button variant="contained" color="primary" type="submit">
         Add Beachbreak
       </Button> */}
-      <StyledFab color="primary" aria-label="add" type="submit" className="styled-fab">
-        <StyledIcon />
-      </StyledFab>
-    </form>
-
+        <StyledFab color="primary" aria-label="add" type="submit" className="styled-fab">
+          <StyledIcon />
+        </StyledFab>
+      </form>
+    </div>
   );
 
