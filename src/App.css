@@ -1,7 +1,7 @@
 @import url(https://fonts.googleapis.com/css?family=Calligraffitti);
 
 .App {
-  text-align: center;
+  text-align: left;
   background-image: url(./images/sahra-peterson-unsplash.jpg);
   background-size: cover;
   min-height: 100vh;
@@ -26,4 +26,16 @@
   font-size: 5em;
   text-shadow: 2px 2px 4px rgb(45, 155, 136);
   /* transform: translate3d(-50%,-50%,0); */
+  align-items: flex-start;
+  /* background-color: whitesmoke; */
+  /* margin-top: 1rem; */
+}
+
+.beachbreakList {
+  background-color: whitesmoke;
+}
+
+.goRight {
+  display: flex;
+  align-self: flex-end;
 }
