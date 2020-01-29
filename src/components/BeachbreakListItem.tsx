@@ -2,6 +2,7 @@ import React, { FunctionComponent } from "react";
 import { Beachbreak } from "../models/beachbreak";
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
+import sea from "../assets/sea.svg";
 
 export interface Props {
     beachbreak: Beachbreak;
@@ -19,6 +20,7 @@ FunctionComponent<Props> = ({ beachbreak, onDelete }) => {
             <ListItemText>
             {beachbreak.name}
             </ListItemText>
+            <img src={sea}></img>
              <button onClick={deleteBeach}>X</button>
         </ListItem>
     );
