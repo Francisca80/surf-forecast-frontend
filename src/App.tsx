@@ -8,6 +8,7 @@ import { BeachbreakList } from "./components/BeachbreakList";
 import { Map } from "./components/Map";
 import { baseUrl } from "./constants";
 import "./App.css";
+import Appbar from './components/Appbar';
 
 interface State {
   newBeachbreak: Beachbreak;
@@ -53,6 +54,8 @@ class App extends Component<{}, State> {
     //   .then(res => this.setState({ beachbreaks: res.body }))
     //   .catch(e => console.warn(e))
   }
+
+
 
   private addBeachbreak = (event: React.FormEvent<HTMLFormElement>) => {
     const index = this.state.beachbreaks.length - 1;
@@ -102,8 +105,10 @@ class App extends Component<{}, State> {
     const { newBeachbreak, beachbreaks } = this.state;
 
     return (
+   
       <div className="App">
         <h2 className="title">Overview</h2>
+
         <NewBeachbreakForm
           beachbreak={newBeachbreak}
           onAdd={this.addBeachbreak}
