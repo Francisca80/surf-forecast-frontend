@@ -8,7 +8,6 @@ import { BeachbreakList } from "./components/BeachbreakList";
 import { Map } from "./components/Map";
 import { baseUrl } from "./constants";
 import "./App.css";
-import Appbar from './components/Appbar';
 
 interface State {
   newBeachbreak: Beachbreak;
@@ -16,6 +15,7 @@ interface State {
   latitude: string;
   longitude: string;
 }
+
 
 class App extends Component<{}, State> {
   state = {
@@ -48,11 +48,11 @@ class App extends Component<{}, State> {
   ]
 
   componentDidMount() {
-    this.setState({ beachbreaks: this.mockData })
-    // request
-    //   .get(baseUrl)
-    //   .then(res => this.setState({ beachbreaks: res.body }))
-    //   .catch(e => console.warn(e))
+    // this.setState({ beachbreaks: this.mockData })
+    request
+      .get(baseUrl)
+      .then(res => this.setState({ beachbreaks: res.body }))
+      .catch(e => console.warn(e))
   }
 
 

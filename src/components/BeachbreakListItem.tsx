@@ -43,7 +43,7 @@ export const BeachbreakListItem:
                 </ListItemText>
 
                 <div style={{ width: '60px', height: "55px" }}>
-                    <img src={sea}></img>
+                    <img alt="wave" src={sea}></img>
                     <p>{beachbreak.waveheightvalue}</p>
                 </div>
 
