@@ -45,13 +45,23 @@ class App extends Component<{}, State> {
     {
       id: 2,
       name: "Peniche",
-      latitude: "38.7325",
-      longitude: "9.4725",
+      latitude: "39.433",
+      longitude: "-9.284",
       waveheightvalue: 1.70,
       swellperiodvalue: 6,
       windspeedvalue: 8.9,
       winddirectionvalue: 310
-    }
+    },
+    // {
+    //   id: 3,
+    //   name: "Nazare",
+    //   latitude: "35.988",
+    //   longitude: "4.542",
+    //   waveheightvalue: 1.70,
+    //   swellperiodvalue: 6,
+    //   windspeedvalue: 8.9,
+    //   winddirectionvalue: 310
+    // }
   ]
 
   componentDidMount() {
@@ -77,7 +87,7 @@ class App extends Component<{}, State> {
     //   .catch(e => console.warn(e))
 
     request
-      .get(`${windyUrl}/list?show=webcams:image,location;categories&lang=de`)
+      .get(`${windyUrl}/list/nearby=39.433,-9.284,10`)
       .set("x-windy-key", apikKey)
       .then(res => console.log(res.body.result))
       .catch(e => console.warn(e))
