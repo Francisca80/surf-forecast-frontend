@@ -58,10 +58,13 @@ class App extends Component<{}, State> {
     // this.setState({ beachbreaks: this.mockData })
 
     if (process.env.NODE_ENV === "development") {
-      this.setState({ beachbreaks: this.mockData })
-    } else {
       request
       .get(baseDevUrl)
+      .then(res => this.setState({ beachbreaks: res.body }))
+      .catch(e => console.warn(e))
+    } else {
+      request
+      .get(baseUrl)
       .then(res => this.setState({ beachbreaks: res.body }))
       .catch(e => console.warn(e))
 
