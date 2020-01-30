@@ -36,23 +36,43 @@ class App extends Component<{}, State> {
       name: "Guincho",
       latitude: "38.7325",
       longitude: "9.4725",
-      waveheightvalue: 1.66
+      waveheightvalue: 1.02,
+      swellperiodvalue: 2,
+      windspeedvalue: 2.6,
+      winddirectionvalue: 340
+
     },
     {
       id: 2,
       name: "Peniche",
       latitude: "38.7325",
       longitude: "9.4725",
-      waveheightvalue: 1.70
+      waveheightvalue: 1.70,
+      swellperiodvalue: 6,
+      windspeedvalue: 8.9,
+      winddirectionvalue: 310
     }
   ]
 
   componentDidMount() {
     // this.setState({ beachbreaks: this.mockData })
-    request
+
+    if (process.env.NODE_ENV === "development") {
+      request
       .get(baseDevUrl)
       .then(res => this.setState({ beachbreaks: res.body }))
       .catch(e => console.warn(e))
+    } else {
+      request
+      .get(baseUrl)
+      .then(res => this.setState({ beachbreaks: res.body }))
+      .catch(e => console.warn(e))
+
+    }
+    // request
+    //   .get(baseDevUrl)
+    //   .then(res => this.setState({ beachbreaks: res.body }))
+    //   .catch(e => console.warn(e))
   }
 
 
