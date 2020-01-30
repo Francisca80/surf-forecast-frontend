@@ -87,7 +87,7 @@ class App extends Component<{}, State> {
     //   .catch(e => console.warn(e))
 
     request
-      .get(`${windyUrl}/list/nearby=39.433,-9.284,10`)
+      .get(`${windyUrl}/list/nearby=39.433,-9.284,10?show=webcams:location,image`)
       .set("x-windy-key", apikKey)
       .then(res => console.log(res.body.result))
       .catch(e => console.warn(e))
