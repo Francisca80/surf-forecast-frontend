@@ -42,6 +42,10 @@ export const BeachbreakListItem:
                     {beachbreak.name}
                 </ListItemText>
 
+                <ListItemText>
+                    {beachbreak.swellperiodvalue}s
+                </ListItemText>
+
                 <div style={{ width: '60px', height: "55px" }}>
                     <img alt="wave" src={sea}></img>
                     <p>{beachbreak.waveheightvalue}</p>

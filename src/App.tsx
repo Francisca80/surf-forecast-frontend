@@ -36,14 +36,16 @@ class App extends Component<{}, State> {
       name: "Guincho",
       latitude: "38.7325",
       longitude: "9.4725",
-      waveheightvalue: 1.66
+      waveheightvalue: 1.66,
+      swellperiodvalue: 2
     },
     {
       id: 2,
       name: "Peniche",
       latitude: "38.7325",
       longitude: "9.4725",
-      waveheightvalue: 1.70
+      waveheightvalue: 1.70,
+      swellperiodvalue: 4
     }
   ]
 
