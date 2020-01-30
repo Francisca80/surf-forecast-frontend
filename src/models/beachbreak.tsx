@@ -4,4 +4,7 @@ export interface Beachbreak {
     latitude: string;
     longitude: string;
     waveheightvalue?: number;
+    swellperiodvalue?: number;
+    winddirectionvalue?: number;
+    windspeedvalue?: number;
     }

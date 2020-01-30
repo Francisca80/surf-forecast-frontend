@@ -36,23 +36,36 @@ export const BeachbreakListItem:
 
         return (
             <div className="container">
-            <ListItem>
+                <ListItem>
 
-                <ListItemText>
-                    {beachbreak.name}
+                    <ListItemText>
+                        {beachbreak.name}
+                    </ListItemText>
+
+                    <ListItemText>
+                        {beachbreak.swellperiodvalue}s
                 </ListItemText>
 
-                <div style={{ width: '60px', height: "55px" }}>
-                    <img alt="wave" src={sea}></img>
-                    <p>{beachbreak.waveheightvalue}</p>
-                </div>
+                    <ListItemText>
+                        {beachbreak.windspeedvalue}m/s
+                </ListItemText>
+                    {/*TODO: make an arrow out of the below value
+                    write the logic outside of this return statement */}
+                    <ListItemText>
+                        {beachbreak.winddirectionvalue}°
+                </ListItemText>
 
-                <StyledFab onClick={deleteBeach} size="small" color="secondary" aria-label="delete">
-                    <StyledIcon></StyledIcon>
-                </StyledFab>
+                    <div style={{ width: '60px', height: "55px" }}>
+                        <img alt="wave" src={sea}></img>
+                        <p>{beachbreak.waveheightvalue}</p>
+                    </div>
 
-            </ListItem>
-            <Divider />
+                    <StyledFab onClick={deleteBeach} size="small" color="secondary" aria-label="delete">
+                        <StyledIcon></StyledIcon>
+                    </StyledFab>
+
+                </ListItem>
+                <Divider />
             </div>
         );
     };
