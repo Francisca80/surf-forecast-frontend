@@ -1,4 +1,4 @@
-import React, { FunctionComponent } from "react";
+import React, { FunctionComponent, useState, useEffect } from "react";
 import { Beachbreak } from "../models/beachbreak";
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -30,12 +30,26 @@ const StyledIcon = withStyles({
 
 export const BeachbreakListItem:
     FunctionComponent<Props> = ({ beachbreak, onDelete }) => {
+        const [showItem, setShowItem] = useState(true);
+        const [displayCam, setDisplayCam] = useState(false);
+
         const deleteBeach = () => {
             onDelete(beachbreak);
         };
+        const styleListItem = showItem ? "" : "none";
+        const styleWebCam = displayCam ? "" : "none";
+
+        const showWebCam = () => {
+            setDisplayCam(!displayCam);
+        }
+
+        const hideWebCam = () => {
+            setDisplayCam(false);
+            setShowItem(true);
+        }
 
         return (
-            <div className="container">
+            <div className="container" style={{ display: styleListItem }}>
                 <ListItem>
 
                     <ListItemText>
@@ -66,6 +80,9 @@ export const BeachbreakListItem:
 
                 </ListItem>
                 <Divider />
+                <button onClick={() => showWebCam()}>Show webcam</button>
+
+                <div style={{ display: styleWebCam, width: "100px", height: "300px", backgroundColor: "red" }}><h1>CAMERA</h1></div>
             </div>
         );
     };
