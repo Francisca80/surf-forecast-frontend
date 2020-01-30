@@ -65,9 +65,9 @@ class App extends Component<{}, State> {
       // .catch(e => console.warn(e))
     } else {
       request
-      .get(baseUrl)
-      .then(res => this.setState({ beachbreaks: res.body }))
-      .catch(e => console.warn(e))
+        .get(baseUrl)
+        .then(res => this.setState({ beachbreaks: res.body }))
+        .catch(e => console.warn(e))
 
     }
     // request
@@ -124,9 +124,11 @@ class App extends Component<{}, State> {
 
   render() {
     const { newBeachbreak, beachbreaks } = this.state;
+    const apikKey = `${process.env.REACT_APP_WINDY_API_KEY}`;
 
+    console.log(apikKey)
     return (
-   
+
       <div className="App">
         <h2 className="title">Overview</h2>
 
@@ -140,6 +142,7 @@ class App extends Component<{}, State> {
           beachbreaks={beachbreaks}
           onDelete={this.deleteBeachbreak}
         />}
+
 
         <Map />
       </div>
