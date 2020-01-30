@@ -48,11 +48,11 @@ class App extends Component<{}, State> {
   ]
 
   componentDidMount() {
-    this.setState({ beachbreaks: this.mockData })
-    // request
-    //   .get(baseUrl)
-    //   .then(res => this.setState({ beachbreaks: res.body }))
-    //   .catch(e => console.warn(e))
+    // this.setState({ beachbreaks: this.mockData })
+    request
+      .get(baseUrl)
+      .then(res => this.setState({ beachbreaks: res.body }))
+      .catch(e => console.warn(e))
   }
 
 
