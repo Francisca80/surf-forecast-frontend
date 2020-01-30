@@ -6,7 +6,7 @@ import { NewBeachbreakForm } from "./components/NewBeachbreakForm";
 import { Beachbreak } from "./models/beachbreak";
 import { BeachbreakList } from "./components/BeachbreakList";
 import { Map } from "./components/Map";
-import { baseUrl, baseDevUrl } from "./constants";
+import { baseUrl, baseDevUrl, windyUrl } from "./constants";
 import "./App.css";
 
 interface State {
@@ -55,6 +55,7 @@ class App extends Component<{}, State> {
   ]
 
   componentDidMount() {
+    const apikKey = `${process.env.REACT_APP_WINDY_API_KEY}`;
     // this.setState({ beachbreaks: this.mockData })
 
     if (process.env.NODE_ENV === "development") {
@@ -74,6 +75,13 @@ class App extends Component<{}, State> {
     //   .get(baseDevUrl)
     //   .then(res => this.setState({ beachbreaks: res.body }))
     //   .catch(e => console.warn(e))
+
+    request
+      .get(`${windyUrl}/list?show=webcams:image,location;categories&lang=de`)
+      .set("x-windy-key", apikKey)
+      .then(res => console.log(res.body.result))
+      .catch(e => console.warn(e))
+
   }
 
 
@@ -124,9 +132,7 @@ class App extends Component<{}, State> {
 
   render() {
     const { newBeachbreak, beachbreaks } = this.state;
-    const apikKey = `${process.env.REACT_APP_WINDY_API_KEY}`;
 
-    console.log(apikKey)
     return (
 
       <div className="App">
