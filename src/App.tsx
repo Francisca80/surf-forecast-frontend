@@ -6,7 +6,7 @@ import { NewBeachbreakForm } from "./components/NewBeachbreakForm";
 import { Beachbreak } from "./models/beachbreak";
 import { BeachbreakList } from "./components/BeachbreakList";
 import { Map } from "./components/Map";
-import { baseUrl } from "./constants";
+import { baseUrl, baseDevUrl } from "./constants";
 import "./App.css";
 
 interface State {
@@ -50,7 +50,7 @@ class App extends Component<{}, State> {
   componentDidMount() {
     // this.setState({ beachbreaks: this.mockData })
     request
-      .get(baseUrl)
+      .get(baseDevUrl)
       .then(res => this.setState({ beachbreaks: res.body }))
       .catch(e => console.warn(e))
   }
