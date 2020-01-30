@@ -9,7 +9,6 @@
     "@testing-library/react": "^9.4.0",
     "@testing-library/user-event": "^7.2.1",
     "@types/jest": "^24.0.25",
-    "@types/node": "^12.12.24",
     "@types/react": "^16.9.17",
     "@types/react-dom": "^16.9.4",
     "@types/react-map-gl": "^5.1.0",
@@ -54,5 +53,8 @@
   "engines": {
     "node": "10.16.3",
     "npm": "4.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^12.12.26"
   }
 }
