@@ -2,7 +2,7 @@ import React, { FunctionComponent } from "react";
 import { Beachbreak } from "../models/beachbreak";
 import { BeachbreakListItem } from "./BeachbreakListItem";
 import List from '@material-ui/core/List';
-import { makeStyles, withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@material-ui/core/styles';
 
 interface Props {
     beachbreaks: Beachbreak[];

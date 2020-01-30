@@ -8,7 +8,6 @@ import { BeachbreakList } from "./components/BeachbreakList";
 import { Map } from "./components/Map";
 import { baseUrl } from "./constants";
 import "./App.css";
-import Appbar from './components/Appbar';
 
 interface State {
   newBeachbreak: Beachbreak;
