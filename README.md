@@ -8,3 +8,7 @@ This application provides a surf forecast for beach breaks in Portugal, includin
 - Typescript
 - Material UI
 - Styled components
+
+### Running the app
+
+To run in dev mode cd into the root folder and run `npm run devstart`
