@@ -36,8 +36,11 @@ class App extends Component<{}, State> {
       name: "Guincho",
       latitude: "38.7325",
       longitude: "9.4725",
-      waveheightvalue: 1.66,
-      swellperiodvalue: 2
+      waveheightvalue: 1.02,
+      swellperiodvalue: 2,
+      windspeedvalue: 2.6,
+      winddirectionvalue: 340
+
     },
     {
       id: 2,
@@ -45,16 +48,28 @@ class App extends Component<{}, State> {
       latitude: "38.7325",
       longitude: "9.4725",
       waveheightvalue: 1.70,
-      swellperiodvalue: 4
+      swellperiodvalue: 6,
+      windspeedvalue: 8.9,
+      winddirectionvalue: 310
     }
   ]
 
   componentDidMount() {
     // this.setState({ beachbreaks: this.mockData })
-    request
+
+    if (process.env.NODE_ENV === "development") {
+      this.setState({ beachbreaks: this.mockData })
+    } else {
+      request
       .get(baseDevUrl)
       .then(res => this.setState({ beachbreaks: res.body }))
       .catch(e => console.warn(e))
+
+    }
+    // request
+    //   .get(baseDevUrl)
+    //   .then(res => this.setState({ beachbreaks: res.body }))
+    //   .catch(e => console.warn(e))
   }
 
 

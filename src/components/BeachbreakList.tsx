@@ -33,6 +33,8 @@ export const BeachbreakList: FunctionComponent<Props> = ({ beachbreaks, onDelete
             <div style={{display: "flex", flexDirection: "row"}}>
                 <ListSubheader>Beach</ListSubheader>
                 <ListSubheader>Swell period</ListSubheader>
+                <ListSubheader>Wind speed</ListSubheader>
+                <ListSubheader>Wind direction</ListSubheader>
                 <ListSubheader>Wave height</ListSubheader>
             </div>
 
