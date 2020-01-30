@@ -5,7 +5,7 @@
 p {
     position: relative;
     z-index: 2;
-    overflow: scroll;
+    overflow: auto;
     bottom: 60px;
     left: 12px;
     color: white;

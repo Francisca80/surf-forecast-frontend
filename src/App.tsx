@@ -6,7 +6,7 @@ import { NewBeachbreakForm } from "./components/NewBeachbreakForm";
 import { Beachbreak } from "./models/beachbreak";
 import { BeachbreakList } from "./components/BeachbreakList";
 import { Map } from "./components/Map";
-import { baseUrl, baseDevUrl, windyUrl } from "./constants";
+import { baseUrl, windyUrl } from "./constants";
 import "./App.css";
 
 interface State {
@@ -33,9 +33,9 @@ class App extends Component<{}, State> {
   mockData = [
     {
       id: 1,
-      name: "Guincho",
-      latitude: "38.7325",
-      longitude: "9.4725",
+      name: "Figueira da Foz",
+      latitude: "38.916",
+      longitude: "-9.908",
       waveheightvalue: 1.02,
       swellperiodvalue: 2,
       windspeedvalue: 2.6,
@@ -86,11 +86,11 @@ class App extends Component<{}, State> {
     //   .then(res => this.setState({ beachbreaks: res.body }))
     //   .catch(e => console.warn(e))
 
-    request
-      .get(`${windyUrl}/list/nearby=39.433,-9.284,10?show=webcams:location,image`)
-      .set("x-windy-key", apikKey)
-      .then(res => console.log(res.body.result))
-      .catch(e => console.warn(e))
+    // request
+    //   .get(`${windyUrl}/list/nearby=39.433,-9.284,10?show=webcams:location,image`)
+    //   .set("x-windy-key", apikKey)
+    //   .then(res => console.log(res.body.result))
+    //   .catch(e => console.warn(e))
 
   }
 

@@ -1,13 +1,18 @@
-import React, { FunctionComponent, useState, useEffect } from "react";
+import React, { FunctionComponent, useState } from "react";
 import { Beachbreak } from "../models/beachbreak";
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import sea from "../assets/sea.svg";
 import Fab from '@material-ui/core/Fab';
+
 import ClearIcon from '@material-ui/icons/Clear';
 import { withStyles } from "@material-ui/core";
 import "./BeachbreakListItem.css"
 import Divider from '@material-ui/core/Divider';
+import Paper from '@material-ui/core/Paper';
+import VideocamIcon from '@material-ui/icons/Videocam';
+import request from "superagent";
+import { windyUrl } from "../constants";
 
 export interface Props {
     beachbreak: Beachbreak;
@@ -27,19 +32,28 @@ const StyledIcon = withStyles({
     }
 })(ClearIcon);
 
+const StyledCamIcon = withStyles({
+    root: {
+        color: 'rgb(45, 155, 136)'
+    }
+})(VideocamIcon)
+
 
 export const BeachbreakListItem:
     FunctionComponent<Props> = ({ beachbreak, onDelete }) => {
         const [showItem, setShowItem] = useState(true);
         const [displayCam, setDisplayCam] = useState(false);
+        const [imgUrl, setImgUrl] = useState("");
+        const [showImgTag, setShowImgTag] = useState(false);
+        const [showPlaceholder, setShowPlaceholder] = useState(false);
 
-        const deleteBeach = () => {
-            onDelete(beachbreak);
-        };
-        const styleListItem = showItem ? "" : "none";
-        const styleWebCam = displayCam ? "" : "none";
+        const apiKey = `${process.env.REACT_APP_WINDY_API_KEY}`;
+        const style = (property: boolean) => property ? "" : "none";
+
+        const deleteBeach = () => onDelete(beachbreak);
 
         const showWebCam = () => {
+            getWebCam()
             setDisplayCam(!displayCam);
         }
 
@@ -48,8 +62,25 @@ export const BeachbreakListItem:
             setShowItem(true);
         }
 
+        const getWebCam = () => {
+            request
+                .get(`${windyUrl}/list/nearby=${beachbreak.latitude},${beachbreak.longitude},20?show=webcams:location,image`)
+                .set("x-windy-key", apiKey)
+                .then(res => {
+                    if (res.body.result.webcams.length === 0) {
+                        setShowImgTag(false);
+                        setShowPlaceholder(true);
+                    } else {
+                        setImgUrl(res.body.result.webcams[0].image.current.preview)
+                        setShowImgTag(true);
+                    }
+                    // setImgUrl(res.body.result.webcams[0].image.current.preview)
+                })
+                .catch(e => console.warn(e))
+        }
+
         return (
-            <div className="container" style={{ display: styleListItem }}>
+            <div className="container" style={{ display: style(showItem) }}>
                 <ListItem>
 
                     <ListItemText>
@@ -77,12 +108,27 @@ export const BeachbreakListItem:
                     <StyledFab onClick={deleteBeach} size="small" color="secondary" aria-label="delete">
                         <StyledIcon></StyledIcon>
                     </StyledFab>
-
+                    <StyledFab
+                        onClick={() => showWebCam()}
+                        color="secondary"
+                        size="small">
+                        <StyledCamIcon></StyledCamIcon>
+                    </StyledFab>
                 </ListItem>
-                <Divider />
-                <button onClick={() => showWebCam()}>Show webcam</button>
 
-                <div style={{ display: styleWebCam, width: "100px", height: "300px", backgroundColor: "red" }}><h1>CAMERA</h1></div>
+
+
+
+                <div style={{ display: style(displayCam), width: "100px" }}>
+                    <img style={{ display: style(showImgTag) }} src={imgUrl} alt="no webcam found"></img>
+                    <div style={{ display: style(showPlaceholder) }}>
+                        <Paper elevation={3}>
+                            No webcam was found, sorry!
+                        </Paper>
+                    </div>
+                </div>
+
+                <Divider />
             </div>
         );
     };
