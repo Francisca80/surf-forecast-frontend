@@ -6,6 +6,7 @@ import { NewBeachbreakForm } from "./components/NewBeachbreakForm";
 import { Beachbreak } from "./models/beachbreak";
 import { BeachbreakList } from "./components/BeachbreakList";
 import { Map } from "./components/Map";
+
 import { baseUrl } from "./constants";
 import "./App.css";
 
@@ -141,7 +142,6 @@ class App extends Component<{}, State> {
           beachbreaks={beachbreaks}
           onDelete={this.deleteBeachbreak}
         />}
-
 
         <Map />
       </div>
