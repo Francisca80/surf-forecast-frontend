@@ -1,18 +1,19 @@
 import React, { FunctionComponent, useState } from "react";
-import { Beachbreak } from "../models/beachbreak";
+import request from "superagent";
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-import sea from "../assets/sea.svg";
 import Fab from '@material-ui/core/Fab';
-
-import ClearIcon from '@material-ui/icons/Clear';
-import { withStyles } from "@material-ui/core";
-import "./BeachbreakListItem.css"
 import Divider from '@material-ui/core/Divider';
 import Paper from '@material-ui/core/Paper';
 import VideocamIcon from '@material-ui/icons/Videocam';
-import request from "superagent";
+import ClearIcon from '@material-ui/icons/Clear';
+import { withStyles } from "@material-ui/core";
+
 import { windyUrl } from "../constants";
+import { Beachbreak } from "../models/beachbreak";
+import sea from "../assets/sea.svg";
+
+import "./BeachbreakListItem.css"
 
 export interface Props {
     beachbreak: Beachbreak;
@@ -22,8 +23,7 @@ const StyledFab = withStyles({
     root: {
         backgroundColor: 'white',
         marginLeft: '10px'
-    },
-    // colorInherit: {backgroundColor: 'white'}
+    }
 })(Fab);
 
 const StyledIcon = withStyles({
@@ -52,6 +52,10 @@ export const BeachbreakListItem:
 
         const deleteBeach = () => onDelete(beachbreak);
 
+        // TODO: fix bug - prevent api request on every click of button
+        // TODO: refactor, get rid of repetition and make code more readable
+        // TODO: make reusable components instead
+
         const showWebCam = () => {
             getWebCam()
             setDisplayCam(!displayCam);
@@ -74,7 +78,6 @@ export const BeachbreakListItem:
                         setImgUrl(res.body.result.webcams[0].image.current.preview)
                         setShowImgTag(true);
                     }
-                    // setImgUrl(res.body.result.webcams[0].image.current.preview)
                 })
                 .catch(e => console.warn(e))
         }
@@ -117,9 +120,7 @@ export const BeachbreakListItem:
                 </ListItem>
 
 
-
-
-                <div style={{ display: style(displayCam), width: "100px" }}>
+                <div style={{ display: style(displayCam), margin: "0 auto" }}>
                     <img style={{ display: style(showImgTag) }} src={imgUrl} alt="no webcam found"></img>
                     <div style={{ display: style(showPlaceholder) }}>
                         <Paper elevation={3}>

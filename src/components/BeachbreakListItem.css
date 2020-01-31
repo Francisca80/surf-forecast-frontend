@@ -1,17 +1,25 @@
 .container {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 p {
-    position: relative;
-    z-index: 2;
-    overflow: auto;
-    bottom: 60px;
-    left: 12px;
-    color: white;
-    font-weight: 600;
+  position: relative;
+  z-index: 2;
+  overflow: auto;
+  bottom: 60px;
+  left: 12px;
+  color: white;
+  font-weight: 600;
 }
 
 img {
-    z-index: 1;
+  z-index: 1;
+}
+
+.ease-in {
+  -moz-animation: slide 1s ease 3.5s forwards;
+  -webkit-animation: slide 1s ease 3.5s forwards;
+  -o-animation: slide 1s ease 3.5s forwards;
+  -ms-animation: slide 1s ease 3.5s forwards;
+  animation: slide 1s ease 3.5s forwards;
 }

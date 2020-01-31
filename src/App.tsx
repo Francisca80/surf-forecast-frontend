@@ -6,7 +6,7 @@ import { NewBeachbreakForm } from "./components/NewBeachbreakForm";
 import { Beachbreak } from "./models/beachbreak";
 import { BeachbreakList } from "./components/BeachbreakList";
 import { Map } from "./components/Map";
-import { baseUrl, windyUrl } from "./constants";
+import { baseUrl } from "./constants";
 import "./App.css";
 
 interface State {
@@ -65,9 +65,6 @@ class App extends Component<{}, State> {
   ]
 
   componentDidMount() {
-    const apikKey = `${process.env.REACT_APP_WINDY_API_KEY}`;
-    // this.setState({ beachbreaks: this.mockData })
-
     if (process.env.NODE_ENV === "development") {
       this.setState({ beachbreaks: this.mockData })
       // request
@@ -81,24 +78,11 @@ class App extends Component<{}, State> {
         .catch(e => console.warn(e))
 
     }
-    // request
-    //   .get(baseDevUrl)
-    //   .then(res => this.setState({ beachbreaks: res.body }))
-    //   .catch(e => console.warn(e))
-
-    // request
-    //   .get(`${windyUrl}/list/nearby=39.433,-9.284,10?show=webcams:location,image`)
-    //   .set("x-windy-key", apikKey)
-    //   .then(res => console.log(res.body.result))
-    //   .catch(e => console.warn(e))
-
   }
-
-
 
   private addBeachbreak = (event: React.FormEvent<HTMLFormElement>) => {
     const index = this.state.beachbreaks.length - 1;
-    const bla: any = this.state.beachbreaks[index]
+    const bla: any = this.state.beachbreaks[index];
     event.preventDefault();
     request
       .post(baseUrl)
@@ -127,7 +111,6 @@ class App extends Component<{}, State> {
   };
 
   private deleteBeachbreak = (beachbreakToDelete: Beachbreak) => {
-    console.log(beachbreakToDelete)
     request
       .delete(`${baseUrl}/${beachbreakToDelete.id}`)
       .then(() => this.setState(previousState => ({
