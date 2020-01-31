@@ -48,7 +48,6 @@ export const BeachbreakListItem:
 
         const [showPlaceholder, setShowPlaceholder] = useState(false);
 
-        const apiKey = `${process.env.REACT_APP_WINDY_API_KEY}`;
         const style = (property: boolean) => property ? "" : "none";
 
         const deleteBeach = () => onDelete(beachbreak);
@@ -70,7 +69,7 @@ export const BeachbreakListItem:
         const getWebCam = () => {
             request
                 .get(`${windyUrl}/list/nearby=${beachbreak.latitude},${beachbreak.longitude},20?show=webcams:location,image,player`)
-                .set("x-windy-key", apiKey)
+                .set("x-windy-key", "AXycMpECnFCcRCUpJudw9vspuU2UzXCa")
                 .accept("application/json")
                 .then(res => {
                     if (res.body.result.webcams.length === 0) {

@@ -130,7 +130,7 @@ class App extends Component<{}, State> {
     return (
 
       <div className="App">
-        <h2 className="title">Overview</h2>
+        <h2 className="title">Surf forecast</h2>
 
         <NewBeachbreakForm
           beachbreak={newBeachbreak}
