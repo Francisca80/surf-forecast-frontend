@@ -68,7 +68,7 @@ export const BeachbreakListItem:
 
         const getWebCam = () => {
             request
-                .get(`${windyUrl}/list/nearby=${beachbreak.latitude},${beachbreak.longitude},20?show=webcams:location,image`)
+                .get(`${windyUrl}/list/nearby=${beachbreak.latitude},${beachbreak.longitude},20?show=webcams:location,image,player`)
                 .set("x-windy-key", "AXycMpECnFCcRCUpJudw9vspuU2UzXCa")
                 .then(res => {
                     if (res.body.result.webcams.length === 0) {
