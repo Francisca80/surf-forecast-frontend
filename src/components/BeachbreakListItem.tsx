@@ -14,6 +14,7 @@ import { Beachbreak } from "../models/beachbreak";
 import sea from "../assets/sea.svg";
 
 import "./BeachbreakListItem.css"
+import { VideoPlayer } from "./Player";
 
 export interface Props {
     beachbreak: Beachbreak;
@@ -43,8 +44,8 @@ export const BeachbreakListItem:
     FunctionComponent<Props> = ({ beachbreak, onDelete }) => {
         const [showItem, setShowItem] = useState(true);
         const [displayCam, setDisplayCam] = useState(false);
-        const [imgUrl, setImgUrl] = useState("");
-        const [showImgTag, setShowImgTag] = useState(false);
+        const [videoUrl, setVideoUrl] = useState("");
+
         const [showPlaceholder, setShowPlaceholder] = useState(false);
 
         const apiKey = `${process.env.REACT_APP_WINDY_API_KEY}`;
@@ -70,13 +71,12 @@ export const BeachbreakListItem:
             request
                 .get(`${windyUrl}/list/nearby=${beachbreak.latitude},${beachbreak.longitude},20?show=webcams:location,image,player`)
                 .set("x-windy-key", apiKey)
+                .accept("application/json")
                 .then(res => {
                     if (res.body.result.webcams.length === 0) {
-                        setShowImgTag(false);
                         setShowPlaceholder(true);
                     } else {
-                        setImgUrl(res.body.result.webcams[0].image.current.preview)
-                        setShowImgTag(true);
+                        setVideoUrl(res.body.result.webcams[0].player.day.embed)
                     }
                 })
                 .catch(e => console.warn(e))
@@ -120,16 +120,22 @@ export const BeachbreakListItem:
                 </ListItem>
 
 
-                <div style={{ display: style(displayCam), margin: "0 auto" }}>
-                    <img style={{ display: style(showImgTag) }} src={imgUrl} alt="no webcam found"></img>
-                    <div style={{ display: style(showPlaceholder) }}>
-                        <Paper elevation={3}>
-                            No webcam was found, sorry!
-                        </Paper>
-                    </div>
-                </div>
+                {displayCam && (
+                    <div>
+                        <div style={{ margin: "0 auto" }}>
+                            <div style={{ display: style(showPlaceholder) }}>
+                                <Paper elevation={3}>No webcam was found, sorry!
+                                </Paper>
+                            </div>
+                        </div>
 
+                        {!showPlaceholder && <div style={{ margin: "0 auto" }}>
+                            <VideoPlayer videoUrl={videoUrl}></VideoPlayer>
+                        </div>}
+                    </div>
+                )}
                 <Divider />
+
             </div>
         );
     };
