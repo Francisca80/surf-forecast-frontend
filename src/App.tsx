@@ -66,6 +66,7 @@ class App extends Component<{}, State> {
   ]
 
   componentDidMount() {
+    console.log(process.env)
     if (process.env.NODE_ENV === "development") {
       this.setState({ beachbreaks: this.mockData })
       // request
@@ -77,7 +78,6 @@ class App extends Component<{}, State> {
         .get(baseUrl)
         .then(res => this.setState({ beachbreaks: res.body }))
         .catch(e => console.warn(e))
-
     }
   }
 
