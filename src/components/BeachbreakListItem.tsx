@@ -46,18 +46,14 @@ const StyledPaper = withStyles({
     }
 })(Paper);
 
-const styleListItem = makeStyles({
-    root: {
-        maxWidth: '100px'
-    }
-})
-
 const useStyles = makeStyles(theme => ({
     root: {
         display: 'flex',
         '& > * + *': {
             marginLeft: theme.spacing(2),
         },
+        justifyContent: 'center',
+        marginBottom: '10px'
     },
 }));
 
@@ -68,7 +64,6 @@ const styleForList = () => {
         maxWidth: "fit-content",
     }
 }
-
 
 export const BeachbreakListItem:
     FunctionComponent<Props> = ({ beachbreak, onDelete }) => {
@@ -163,7 +158,7 @@ export const BeachbreakListItem:
                         <div style={{ margin: "0 auto" }}>
                             <div style={{ display: style(showPlaceholder) }}>
                                 <StyledPaper elevation={3}>
-                                    <p style={{ color: 'black', margin: '0 auto' }}>No webcam was found, sorry!</p>
+                                    <p style={{ color: 'black', margin: '0 auto', textAlign: 'center' }}>No webcam was found, sorry!</p>
                                 </StyledPaper>
                             </div>
                         </div>
@@ -177,7 +172,6 @@ export const BeachbreakListItem:
                     <div className={classes.root}>
                         <CircularProgress color="secondary" />
                     </div>}
-
                 <Divider />
 
             </div>

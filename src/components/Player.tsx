@@ -8,7 +8,7 @@ interface Props {
 export const VideoPlayer: FunctionComponent<any> = (props: Props) => {
     return (
         <Iframe url={props.videoUrl}
-        width="450px"
+        width="646px"
         height="450px"
         id="myId"
         className="myClassname"
