@@ -7,7 +7,7 @@ import Divider from '@material-ui/core/Divider';
 import Paper from '@material-ui/core/Paper';
 import VideocamIcon from '@material-ui/icons/Videocam';
 import ClearIcon from '@material-ui/icons/Clear';
-import { withStyles, makeStyles } from "@material-ui/core";
+import { withStyles, makeStyles, Typography } from "@material-ui/core";
 import CircularProgress from '@material-ui/core/CircularProgress';
 
 import { windyUrl } from "../constants";
@@ -38,7 +38,19 @@ const StyledCamIcon = withStyles({
     root: {
         color: 'rgb(45, 155, 136)'
     }
-})(VideocamIcon)
+})(VideocamIcon);
+
+const StyledPaper = withStyles({
+    root: {
+        height: '30px'
+    }
+})(Paper);
+
+const styleListItem = makeStyles({
+    root: {
+        maxWidth: '100px'
+    }
+})
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -49,6 +61,13 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
+const styleForList = () => {
+    return {
+        fontFamily: "Montserrat",
+        fontSize: "12px",
+        maxWidth: "fit-content",
+    }
+}
 
 
 export const BeachbreakListItem:
@@ -97,28 +116,34 @@ export const BeachbreakListItem:
 
         return (
             <div className="container">
-                <ListItem>
+                <ListItem >
 
-                    <ListItemText>
-                        {beachbreak.name}
+                    <ListItemText disableTypography primary={
+                        <Typography style={styleForList()}>{beachbreak.name}</Typography>
+                    }>
                     </ListItemText>
 
-                    <ListItemText>
-                        {beachbreak.swellperiodvalue}s
-                </ListItemText>
+                    <ListItemText disableTypography primary={
+                        <Typography style={styleForList()}>{beachbreak.swellperiodvalue}s</Typography>
+                    }>
+                    </ListItemText>
 
-                    <ListItemText>
-                        {beachbreak.windspeedvalue}m/s
-                </ListItemText>
+
+                    <ListItemText disableTypography primary={
+                        <Typography style={styleForList()}>{beachbreak.windspeedvalue}m/s</Typography>
+                    }>
+                    </ListItemText>
                     {/*TODO: make an arrow out of the below value
                     write the logic outside of this return statement */}
-                    <ListItemText>
-                        {beachbreak.winddirectionvalue}°
-                </ListItemText>
+                    <ListItemText disableTypography primary={
+                        <Typography style={styleForList()}>{beachbreak.winddirectionvalue}°</Typography>
+                    }>
+                    </ListItemText>
+
 
                     <div style={{ width: '60px', height: "55px" }}>
                         <img alt="wave" src={sea}></img>
-                        <p>{beachbreak.waveheightvalue}</p>
+                        <p className="wave-height-text">{beachbreak.waveheightvalue}</p>
                     </div>
 
                     <StyledFab onClick={deleteBeach} size="small" color="secondary" aria-label="delete">
@@ -137,20 +162,21 @@ export const BeachbreakListItem:
                     <div>
                         <div style={{ margin: "0 auto" }}>
                             <div style={{ display: style(showPlaceholder) }}>
-                                <Paper elevation={3}>No webcam was found, sorry!
-                                </Paper>
+                                <StyledPaper elevation={3}>
+                                    <p style={{ color: 'black', margin: '0 auto' }}>No webcam was found, sorry!</p>
+                                </StyledPaper>
                             </div>
                         </div>
 
-                        {!showPlaceholder && !loading && <div style={{ margin: "0 auto" }}>
+                        {!showPlaceholder && !loading && <div style={{ textAlign: "center" }}>
                             <VideoPlayer videoUrl={videoUrl}></VideoPlayer>
                         </div>}
                     </div>
                 )}
-                {loading && 
-                <div className={classes.root}>
-                    <CircularProgress color="secondary" />
-                </div>}
+                {loading &&
+                    <div className={classes.root}>
+                        <CircularProgress color="secondary" />
+                    </div>}
 
                 <Divider />
 

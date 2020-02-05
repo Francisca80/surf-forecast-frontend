@@ -1,4 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Calligraffitti);
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
 
 .App {
   text-align: left;
@@ -38,4 +39,12 @@
 .goRight {
   display: flex;
   align-self: flex-end;
+}
+
+p {
+  font-family: "Montserrat";
+}
+
+span {
+  font-family: "Montserrat";
 }

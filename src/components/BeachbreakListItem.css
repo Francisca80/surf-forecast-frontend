@@ -1,8 +1,10 @@
+@import url(https://fonts.googleapis.com/css?family=Montserrat);
+
 .container {
     margin-bottom: 10px;
 }
 
-p {
+.wave-height-text {
     position: relative;
     z-index: 2;
     overflow: scroll;
