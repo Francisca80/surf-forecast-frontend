@@ -13,7 +13,7 @@ interface Props {
 const StyledList = withStyles({
     root: {
         width: '100%',
-        maxWidth: 550,
+        maxWidth: 650,
         backgroundColor: "white",
         margin: "0 auto",
         marginBottom: "30px",
@@ -31,11 +31,14 @@ export const BeachbreakList: FunctionComponent<Props> = ({ beachbreaks, onDelete
 
         <StyledList>
             <div style={{display: "flex", flexDirection: "row"}}>
+            <ListSubheader></ListSubheader>
                 <ListSubheader>Beach</ListSubheader>
                 <ListSubheader>Swell period</ListSubheader>
                 <ListSubheader>Wind speed</ListSubheader>
                 <ListSubheader>Wind direction</ListSubheader>
                 <ListSubheader>Wave height</ListSubheader>
+                <ListSubheader></ListSubheader>
+                {/* <ListSubheader></ListSubheader> */}
             </div>
 
             {beachbreaks.map(beachbreak => (
