@@ -22,7 +22,6 @@ interface State {
 class App extends Component<{}, State> {
   state = {
     newBeachbreak: {
-      // id: 1,
       name: "",
       latitude: "",
       longitude: ""
@@ -33,51 +32,32 @@ class App extends Component<{}, State> {
     searchBeachInput: ""
   };
 
-  mockData = [
-    {
-      id: 1,
-      name: "Figueira da Foz",
-      latitude: "38.916",
-      longitude: "-9.908",
-      waveheightvalue: 1.02,
-      swellperiodvalue: 2,
-      windspeedvalue: 2.6,
-      winddirectionvalue: 340
+  // mockData = [
+  //   {
+  //     id: 1,
+  //     name: "Figueira da Foz",
+  //     latitude: "38.916",
+  //     longitude: "-9.908",
+  //     waveheightvalue: 1.02,
+  //     swellperiodvalue: 2,
+  //     windspeedvalue: 2.6,
+  //     winddirectionvalue: 340
 
-    },
-    {
-      id: 2,
-      name: "Peniche",
-      latitude: "39.433",
-      longitude: "-9.284",
-      waveheightvalue: 1.70,
-      swellperiodvalue: 6,
-      windspeedvalue: 8.9,
-      winddirectionvalue: 310
-    },
-    // {
-    //   id: 3,
-    //   name: "Nazare",
-    //   latitude: "35.988",
-    //   longitude: "4.542",
-    //   waveheightvalue: 1.70,
-    //   swellperiodvalue: 6,
-    //   windspeedvalue: 8.9,
-    //   winddirectionvalue: 310
-    // }
-  ]
+  //   },
+  //   {
+  //     id: 2,
+  //     name: "Peniche",
+  //     latitude: "39.433",
+  //     longitude: "-9.284",
+  //     waveheightvalue: 1.70,
+  //     swellperiodvalue: 6,
+  //     windspeedvalue: 8.9,
+  //     winddirectionvalue: 310
+  //   }
+  // ]
 
   componentDidMount() {
-    // if (process.env.NODE_ENV === "development") {
-    //   this.setState({ beachbreaks: this.mockData })
-    //   // request
-    //   // .get(baseDevUrl)
-    //   // .then(res => this.setState({ beachbreaks: res.body }))
-    //   // .catch(e => console.warn(e))
-    // } else 
-    // {
     this.getAllBeaches();
-    // }
   }
 
   getAllBeaches = () => {
@@ -89,9 +69,8 @@ class App extends Component<{}, State> {
 
   private addBeachbreak = (event: React.FormEvent<HTMLFormElement>) => {
     const index = this.state.beachbreaks.length - 1;
-    const bla: any = this.state.beachbreaks[index];
-    console.log(index)
-    const input = "Peniche"
+    const lastBeach: any = this.state.beachbreaks[index];
+
     event.preventDefault();
 
     request
@@ -102,50 +81,24 @@ class App extends Component<{}, State> {
 
         this.setState({
           newBeachbreak: {
-            id: bla.id + 1,
+            id: lastBeach.id + 1,
             name: firstHit.display_name.split(",")[0],
             latitude: firstHit.lat,
             longitude: firstHit.lon
           }
         })
-        console.log(firstHit)
+
         request
           .post(baseUrl)
           .send(this.state.newBeachbreak)
-          .then(() => {
-            this.getAllBeaches();
-          })
-          // .then(() => 
-          //   this.setState(previousState => ({
-          //   newBeachbreak: {
-          //     id: bla.id + 1,
-          //     name: "",
-          //     latitude: "",
-          //     longitude: ""
-          //   },
-          //   // beachbreaks: [...previousState.beachbreaks, previousState.newBeachbreak]
-          // })))
+          .then(() => this.getAllBeaches())
           .catch(e => console.warn(e));
       })
       .catch(e => console.warn(e))
 
-    // request
-    //   .post(baseUrl)
-    //   .send(this.state.newBeachbreak)
-    //   .then(() => this.setState(previousState => ({
-    //     newBeachbreak: {
-    //       id: bla.id + 1,
-    //       name: "",
-    //       latitude: "",
-    //       longitude: ""
-    //     },
-    //     beachbreaks: [...previousState.beachbreaks, previousState.newBeachbreak]
-    //   })))
-    //   .catch(e => console.warn(e));
   };
 
   private handleBeachbreakChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    console.log(event.target.value);
     this.setState({
       searchBeachInput: event.target.value
     })
