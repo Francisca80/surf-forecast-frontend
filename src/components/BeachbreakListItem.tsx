@@ -7,7 +7,8 @@ import Divider from '@material-ui/core/Divider';
 import Paper from '@material-ui/core/Paper';
 import VideocamIcon from '@material-ui/icons/Videocam';
 import ClearIcon from '@material-ui/icons/Clear';
-import { withStyles } from "@material-ui/core";
+import { withStyles, makeStyles } from "@material-ui/core";
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 import { windyUrl } from "../constants";
 import { Beachbreak } from "../models/beachbreak";
@@ -39,13 +40,23 @@ const StyledCamIcon = withStyles({
     }
 })(VideocamIcon)
 
+const useStyles = makeStyles(theme => ({
+    root: {
+        display: 'flex',
+        '& > * + *': {
+            marginLeft: theme.spacing(2),
+        },
+    },
+}));
+
+
 
 export const BeachbreakListItem:
     FunctionComponent<Props> = ({ beachbreak, onDelete }) => {
         const [showItem, setShowItem] = useState(true);
         const [displayCam, setDisplayCam] = useState(false);
         const [videoUrl, setVideoUrl] = useState("");
-
+        const [loading, setLoading] = useState(false);
         const [showPlaceholder, setShowPlaceholder] = useState(false);
 
         const style = (property: boolean) => property ? "" : "none";
@@ -57,16 +68,17 @@ export const BeachbreakListItem:
         // TODO: make reusable components instead
 
         const showWebCam = () => {
-            getWebCam()
             setDisplayCam(!displayCam);
+
+            if (!displayCam) {
+                getWebCam()
+            }
         }
 
-        const hideWebCam = () => {
-            setDisplayCam(false);
-            setShowItem(true);
-        }
+        const classes = useStyles();
 
         const getWebCam = () => {
+            setLoading(true);
             request
                 .get(`${windyUrl}/list/nearby=${beachbreak.latitude},${beachbreak.longitude},20?show=webcams:location,image,player`)
                 .set("x-windy-key", "AXycMpECnFCcRCUpJudw9vspuU2UzXCa")
@@ -74,11 +86,14 @@ export const BeachbreakListItem:
                 .then(res => {
                     if (res.body.result.webcams.length === 0) {
                         setShowPlaceholder(true);
+                        setLoading(false)
                     } else {
                         setVideoUrl(res.body.result.webcams[0].player.day.embed)
+                        setLoading(false)
                     }
                 })
                 .catch(e => console.warn(e))
+                .finally(() => setLoading(false))
         }
 
         return (
@@ -119,7 +134,7 @@ export const BeachbreakListItem:
                 </ListItem>
 
 
-                {displayCam && (
+                {displayCam && !loading && (
                     <div>
                         <div style={{ margin: "0 auto" }}>
                             <div style={{ display: style(showPlaceholder) }}>
@@ -128,11 +143,16 @@ export const BeachbreakListItem:
                             </div>
                         </div>
 
-                        {!showPlaceholder && <div style={{ margin: "0 auto" }}>
+                        {!showPlaceholder && !loading && <div style={{ margin: "0 auto" }}>
                             <VideoPlayer videoUrl={videoUrl}></VideoPlayer>
                         </div>}
                     </div>
                 )}
+                {loading && 
+                <div className={classes.root}>
+                    <CircularProgress color="secondary" />
+                </div>}
+
                 <Divider />
 
             </div>
