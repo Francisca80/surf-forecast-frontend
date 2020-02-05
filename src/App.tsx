@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 
 import request from "superagent";
+import { CircularProgress } from "@material-ui/core";
 
 import { NewBeachbreakForm } from "./components/NewBeachbreakForm";
 import { Beachbreak } from "./models/beachbreak";
 import { BeachbreakList } from "./components/BeachbreakList";
-import { Map } from "./components/Map";
-
+// import { Map } from "./components/Map";
 import { baseUrl, locationIqUrl } from "./constants";
 import "./App.css";
 
@@ -16,8 +16,8 @@ interface State {
   latitude: string;
   longitude: string;
   searchBeachInput: string;
+  loading: boolean;
 }
-
 
 class App extends Component<{}, State> {
   state = {
@@ -29,45 +29,62 @@ class App extends Component<{}, State> {
     beachbreaks: [],
     latitude: "",
     longitude: "",
-    searchBeachInput: ""
+    searchBeachInput: "",
+    loading: true
   };
 
-  // mockData = [
-  //   {
-  //     id: 1,
-  //     name: "Figueira da Foz",
-  //     latitude: "38.916",
-  //     longitude: "-9.908",
-  //     waveheightvalue: 1.02,
-  //     swellperiodvalue: 2,
-  //     windspeedvalue: 2.6,
-  //     winddirectionvalue: 340
+  mockData = [
+    {
+      id: 1,
+      name: "Figueira da Foz",
+      latitude: "38.916",
+      longitude: "-9.908",
+      waveheightvalue: 1.02,
+      swellperiodvalue: 2,
+      windspeedvalue: 2.6,
+      winddirectionvalue: 340
 
-  //   },
-  //   {
-  //     id: 2,
-  //     name: "Peniche",
-  //     latitude: "39.433",
-  //     longitude: "-9.284",
-  //     waveheightvalue: 1.70,
-  //     swellperiodvalue: 6,
-  //     windspeedvalue: 8.9,
-  //     winddirectionvalue: 310
-  //   }
-  // ]
+    },
+    {
+      id: 2,
+      name: "Peniche",
+      latitude: "39.433",
+      longitude: "-9.284",
+      waveheightvalue: 1.70,
+      swellperiodvalue: 6,
+      windspeedvalue: 8.9,
+      winddirectionvalue: 310
+    }
+  ]
 
   componentDidMount() {
     this.getAllBeaches();
+    // this.mockTimeOut();
+  }
+
+  mockTimeOut = () => {
+    this.setState({ loading: true })
+
+    setTimeout(() => {
+      this.setState({ beachbreaks: this.mockData })
+      this.setState({ loading: false })
+    }, 2000)
   }
 
   getAllBeaches = () => {
+    this.setState({
+      loading: true
+    })
     request
-    .get(baseUrl)
-    .then(res => this.setState({ beachbreaks: res.body }))
-    .catch(e => console.warn(e))
+      .get(baseUrl)
+      .then(res => this.setState({ beachbreaks: res.body }))
+      .catch(e => console.warn(e))
+      .finally(() => this.setState({ loading: false }))
   }
 
   private addBeachbreak = (event: React.FormEvent<HTMLFormElement>) => {
+    this.setState({ loading: true })
+
     const index = this.state.beachbreaks.length - 1;
     const lastBeach: any = this.state.beachbreaks[index];
 
@@ -87,7 +104,6 @@ class App extends Component<{}, State> {
             longitude: firstHit.lon
           }
         })
-
         request
           .post(baseUrl)
           .send(this.state.newBeachbreak)
@@ -95,6 +111,7 @@ class App extends Component<{}, State> {
           .catch(e => console.warn(e));
       })
       .catch(e => console.warn(e))
+      // .finally(() => this.setState({ loading: false }))
 
   };
 
@@ -117,8 +134,17 @@ class App extends Component<{}, State> {
       .catch(e => console.warn(e))
   };
 
+  styleProgressCircle = () => {
+    return {
+      maxWidth: '100px',
+      margin: '0 auto',
+      marginBottom: '120px',
+      marginTop: '100px',
+    }
+  }
+
   render() {
-    const { newBeachbreak, beachbreaks } = this.state;
+    const { newBeachbreak, beachbreaks, loading } = this.state;
 
     return (
 
@@ -129,14 +155,21 @@ class App extends Component<{}, State> {
           beachbreak={newBeachbreak}
           onAdd={this.addBeachbreak}
           onChange={this.handleBeachbreakChange}
-
         />
-        {beachbreaks && <BeachbreakList
-          beachbreaks={beachbreaks}
-          onDelete={this.deleteBeachbreak}
-        />}
 
-        <Map />
+        {<div className={!loading ? 'fade-in' : ''}>
+          <BeachbreakList
+            loading={loading}
+            beachbreaks={beachbreaks}
+            onDelete={this.deleteBeachbreak}
+          />
+        </div>}
+
+        {loading && <div style={this.styleProgressCircle()}>
+          <CircularProgress size={140} color="primary" />
+        </div>}
+
+        {/* <Map /> */}
       </div>
     );
   }

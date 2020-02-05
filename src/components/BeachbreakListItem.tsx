@@ -170,7 +170,7 @@ export const BeachbreakListItem:
                 )}
                 {loading &&
                     <div className={classes.root}>
-                        <CircularProgress color="secondary" />
+                        <CircularProgress color="primary" />
                     </div>}
                 <Divider />
 
