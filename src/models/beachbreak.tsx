@@ -1,5 +1,5 @@
 export interface Beachbreak {
-    id: number;
+    id?: number;
     name: string;
     latitude: string;
     longitude: string;
