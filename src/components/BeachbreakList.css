@@ -1,0 +1,23 @@
+.subheaderContainer {
+  display: flex;
+  flex-direction: row;
+}
+
+.fadeIn {
+  opacity: 1;
+  width: 100px;
+  height: 100px;
+  -webkit-transition: all 0.5s ease-in-out;
+  -moz-transition: all 0.5s ease-in-out;
+  -ms-transition: all 0.5s ease-in-out;
+  -o-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+
+.MuiCircularProgress-colorPrimary {
+  color: rgb(0, 189, 157) !important;
+  border-style: solid;
+  border-radius: 50%;
+  border-width: 5px;
+  border-color: white;
+}
