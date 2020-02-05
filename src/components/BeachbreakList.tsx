@@ -1,11 +1,12 @@
 import React, { FunctionComponent } from "react";
 
-import List from '@material-ui/core/List';
 import ListSubheader from '@material-ui/core/ListSubheader';
-import { withStyles } from '@material-ui/core/styles';
 
 import { Beachbreak } from "../models/beachbreak";
+import { StyledList } from "../shared/StyledComponents";
 import { BeachbreakListItem } from "./BeachbreakListItem";
+
+import "./BeachbreakList.css"
 
 interface Props {
     beachbreaks: Beachbreak[];
@@ -13,26 +14,11 @@ interface Props {
     loading: boolean;
 }
 
-const StyledList = withStyles({
-    root: {
-        width: '100%',
-        maxWidth: 650,
-        backgroundColor: "white",
-        margin: "0 auto",
-        marginBottom: "30px",
-        marginTop: "20px"
-    },
-    padding: {
-        paddingTop: 0,
-        paddingBottom: 0
-    }
-})(List);
-
 export const BeachbreakList: FunctionComponent<Props> = ({ beachbreaks, onDelete, loading }) => {
 
     return (
         <StyledList>
-            {!loading && <div style={{ display: "flex", flexDirection: "row" }}>
+            {!loading && <div className="subheaderContainer">
                 <ListSubheader></ListSubheader>
                 <ListSubheader>Beach</ListSubheader>
                 <ListSubheader>Swell period</ListSubheader>
@@ -47,7 +33,6 @@ export const BeachbreakList: FunctionComponent<Props> = ({ beachbreaks, onDelete
                 <BeachbreakListItem key={beachbreak.id} beachbreak={beachbreak} onDelete={onDelete} />
             ))}
                 </React.Fragment>}
-          
         </StyledList>
     );
 };

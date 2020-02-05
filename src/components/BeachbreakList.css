@@ -1,3 +1,8 @@
+.subheaderContainer {
+  display: flex;
+  flex-direction: row;
+}
+
 .fadeIn {
   opacity: 1;
   width: 100px;

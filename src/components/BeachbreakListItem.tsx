@@ -1,50 +1,26 @@
 import React, { FunctionComponent, useState } from "react";
 import request from "superagent";
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import Fab from '@material-ui/core/Fab';
-import Divider from '@material-ui/core/Divider';
-import Paper from '@material-ui/core/Paper';
-import VideocamIcon from '@material-ui/icons/Videocam';
-import ClearIcon from '@material-ui/icons/Clear';
-import { withStyles, makeStyles, Typography } from "@material-ui/core";
-import CircularProgress from '@material-ui/core/CircularProgress';
+import {
+    ListItem,
+    ListItemText,
+    Divider,
+    CircularProgress,
+    makeStyles,
+    Typography
+} from '@material-ui/core';
 
+import { StyledCamIcon, StyledFab, StyledIcon, StyledPaper } from "../shared/StyledComponents";
 import { windyUrl } from "../constants";
 import { Beachbreak } from "../models/beachbreak";
 import sea from "../assets/sea.svg";
 
-import "./BeachbreakListItem.css"
 import { VideoPlayer } from "./Player";
+import "./BeachbreakListItem.css";
 
 export interface Props {
     beachbreak: Beachbreak;
     onDelete: (beachbreak: Beachbreak) => void;
 }
-const StyledFab = withStyles({
-    root: {
-        backgroundColor: 'white',
-        marginLeft: '10px'
-    }
-})(Fab);
-
-const StyledIcon = withStyles({
-    root: {
-        color: 'rgb(45, 155, 136)'
-    }
-})(ClearIcon);
-
-const StyledCamIcon = withStyles({
-    root: {
-        color: 'rgb(45, 155, 136)'
-    }
-})(VideocamIcon);
-
-const StyledPaper = withStyles({
-    root: {
-        height: '30px'
-    }
-})(Paper);
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -136,17 +112,18 @@ export const BeachbreakListItem:
                     </ListItemText>
 
 
-                    <div style={{ width: '60px', height: "55px" }}>
+                    <div className="waveImgWrapper">
                         <img alt="wave" src={sea}></img>
-                        <p className="wave-height-text">{beachbreak.waveheightvalue}</p>
+                        <p className="waveHeightText">{beachbreak.waveheightvalue}</p>
                     </div>
 
-                    <StyledFab onClick={deleteBeach} size="small" color="secondary" aria-label="delete">
+                    <StyledFab onClick={deleteBeach} size="small" color="primary" aria-label="delete">
                         <StyledIcon></StyledIcon>
                     </StyledFab>
+
                     <StyledFab
                         onClick={() => showWebCam()}
-                        color="secondary"
+                        color="primary"
                         size="small">
                         <StyledCamIcon></StyledCamIcon>
                     </StyledFab>
@@ -155,15 +132,16 @@ export const BeachbreakListItem:
 
                 {displayCam && !loading && (
                     <div>
-                        <div style={{ margin: "0 auto" }}>
+                        <div className="noCamFoundWrapper">
                             <div style={{ display: style(showPlaceholder) }}>
                                 <StyledPaper elevation={3}>
-                                    <p style={{ color: 'black', margin: '0 auto', textAlign: 'center' }}>No webcam was found, sorry!</p>
+                                    <p className="noCamMessage">No webcam was found, sorry!</p>
                                 </StyledPaper>
                             </div>
                         </div>
 
-                        {!showPlaceholder && !loading && <div style={{ textAlign: "center" }}>
+                        {!showPlaceholder && !loading && 
+                        <div className="videoWrapper">
                             <VideoPlayer videoUrl={videoUrl}></VideoPlayer>
                         </div>}
                     </div>

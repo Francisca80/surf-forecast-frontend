@@ -8,6 +8,7 @@ import { Beachbreak } from "./models/beachbreak";
 import { BeachbreakList } from "./components/BeachbreakList";
 // import { Map } from "./components/Map";
 import { baseUrl, locationIqUrl } from "./constants";
+import { mockData } from "./mockData";
 import "./App.css";
 
 interface State {
@@ -33,40 +34,16 @@ class App extends Component<{}, State> {
     loading: true
   };
 
-  mockData = [
-    {
-      id: 1,
-      name: "Figueira da Foz",
-      latitude: "38.916",
-      longitude: "-9.908",
-      waveheightvalue: 1.02,
-      swellperiodvalue: 2,
-      windspeedvalue: 2.6,
-      winddirectionvalue: 340
-
-    },
-    {
-      id: 2,
-      name: "Peniche",
-      latitude: "39.433",
-      longitude: "-9.284",
-      waveheightvalue: 1.70,
-      swellperiodvalue: 6,
-      windspeedvalue: 8.9,
-      winddirectionvalue: 310
-    }
-  ]
-
   componentDidMount() {
-    this.getAllBeaches();
-    // this.mockTimeOut();
+    // this.getAllBeaches();
+    this.mockTimeOut();
   }
 
   mockTimeOut = () => {
     this.setState({ loading: true })
 
     setTimeout(() => {
-      this.setState({ beachbreaks: this.mockData })
+      this.setState({ beachbreaks: mockData })
       this.setState({ loading: false })
     }, 2000)
   }
@@ -111,15 +88,12 @@ class App extends Component<{}, State> {
           .catch(e => console.warn(e));
       })
       .catch(e => console.warn(e))
-      // .finally(() => this.setState({ loading: false }))
-
   };
 
-  private handleBeachbreakChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  private handleBeachbreakChange = (event: React.ChangeEvent<HTMLInputElement>) => 
     this.setState({
       searchBeachInput: event.target.value
     })
-  };
 
   private deleteBeachbreak = (beachbreakToDelete: Beachbreak) => {
     request
@@ -133,15 +107,6 @@ class App extends Component<{}, State> {
       })))
       .catch(e => console.warn(e))
   };
-
-  styleProgressCircle = () => {
-    return {
-      maxWidth: '100px',
-      margin: '0 auto',
-      marginBottom: '120px',
-      marginTop: '100px',
-    }
-  }
 
   render() {
     const { newBeachbreak, beachbreaks, loading } = this.state;
@@ -165,7 +130,7 @@ class App extends Component<{}, State> {
           />
         </div>}
 
-        {loading && <div style={this.styleProgressCircle()}>
+        {loading && <div className="styleProgressCircle">
           <CircularProgress size={140} color="primary" />
         </div>}
 
