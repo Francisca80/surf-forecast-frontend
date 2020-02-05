@@ -4,7 +4,6 @@ import AddIcon from '@material-ui/icons/Add';
 import { Beachbreak } from "../models/beachbreak";
 import { TextField, withStyles } from "@material-ui/core";
 
-
 interface Props {
   onChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   onAdd: (event: React.FormEvent<HTMLFormElement>) => void;
@@ -28,10 +27,12 @@ export const NewBeachbreakForm: FunctionComponent<Props> = ({
   onChange,
   onAdd,
   beachbreak
-}) => (
-    <div style={{margin: "0 auto", width: "fit-content"}}>
+}) => {
+  
+  return (
+    <div style={{ margin: "0 auto", width: "fit-content" }}>
       <form onSubmit={onAdd}>
-        <TextField onChange={onChange} value={beachbreak.name} id="beachbreak" label="Standard" />
+        <TextField onChange={onChange}  id="beachbreak" label="Standard" />
         {/* <Button variant="contained" color="primary" type="submit">
         Add Beachbreak
       </Button> */}
@@ -40,5 +41,6 @@ export const NewBeachbreakForm: FunctionComponent<Props> = ({
         </StyledFab>
       </form>
     </div>
-  );
+  )
+};
 
