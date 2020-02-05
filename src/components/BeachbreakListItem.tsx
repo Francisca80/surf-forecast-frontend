@@ -53,7 +53,6 @@ const useStyles = makeStyles(theme => ({
 
 export const BeachbreakListItem:
     FunctionComponent<Props> = ({ beachbreak, onDelete }) => {
-        const [showItem, setShowItem] = useState(true);
         const [displayCam, setDisplayCam] = useState(false);
         const [videoUrl, setVideoUrl] = useState("");
         const [loading, setLoading] = useState(false);
@@ -97,7 +96,7 @@ export const BeachbreakListItem:
         }
 
         return (
-            <div className="container" style={{ display: style(showItem) }}>
+            <div className="container">
                 <ListItem>
 
                     <ListItemText>
