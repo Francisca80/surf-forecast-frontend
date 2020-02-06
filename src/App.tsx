@@ -36,8 +36,8 @@ class App extends Component<{}, State> {
   };
 
   componentDidMount() {
-    // this.getAllBeaches();
-    this.mockTimeOut();
+    this.getAllBeaches();
+    // this.mockTimeOut();
   }
 
   mockTimeOut = () => {
