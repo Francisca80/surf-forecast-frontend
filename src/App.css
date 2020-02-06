@@ -27,14 +27,14 @@ span {
   margin-bottom: 20px;
   margin-top: 10px;
   padding: 0;
-  color: #fff;
+  color: rgb(38, 138, 121);
   text-align: center;
   top: 50%;
   left: 50%;
   font-family: "Raleway";
   font-weight: 500;
   font-size: 4em;
-  text-shadow: 1px 0px 7px rgb(38, 138, 121);
+  text-shadow: 3px -3px 1px white;
   align-items: flex-start;
 }
 
