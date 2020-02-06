@@ -54,7 +54,7 @@ class App extends Component<{}, State> {
       loading: true
     })
     request
-      .get(baseDevUrl)
+      .get(baseUrl)
       .then(res => this.setState({ beachbreaks: res.body }))
       .catch(e => console.warn(e))
       .finally(() => this.setState({ loading: false }))
