@@ -10,14 +10,14 @@ export const mockData = [
         winddirectionvalue: 340
 
     },
-    {
-        id: 2,
-        name: "Peniche",
-        latitude: "39.433",
-        longitude: "-9.284",
-        waveheightvalue: 1.70,
-        swellperiodvalue: 6,
-        windspeedvalue: 8.9,
-        winddirectionvalue: 310
-    }
+    // {
+    //     id: 2,
+    //     name: "Peniche",
+    //     latitude: "39.433",
+    //     longitude: "-9.284",
+    //     waveheightvalue: 1.70,
+    //     swellperiodvalue: 6,
+    //     windspeedvalue: 8.9,
+    //     winddirectionvalue: 310
+    // }
 ]

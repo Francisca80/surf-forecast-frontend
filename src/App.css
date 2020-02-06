@@ -1,5 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Calligraffitti);
-@import url(https://fonts.googleapis.com/css?family=Montserrat);
+@import url(https://fonts.googleapis.com/css?family=Raleway);
 
 p {
   font-family: "Montserrat";
@@ -24,15 +24,17 @@ span {
 
 .title {
   margin: 0;
+  margin-bottom: 20px;
+  margin-top: 10px;
   padding: 0;
   color: #fff;
   text-align: center;
   top: 50%;
   left: 50%;
-  font-family: "Calligraffitti";
-  font-weight: normal;
-  font-size: 5em;
-  text-shadow: 3px 2px 4px rgb(38, 138, 121);
+  font-family: "Raleway";
+  font-weight: 500;
+  font-size: 4em;
+  text-shadow: 1px 0px 7px rgb(38, 138, 121);
   align-items: flex-start;
 }
 
