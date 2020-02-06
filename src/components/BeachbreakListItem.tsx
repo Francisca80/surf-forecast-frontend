@@ -147,6 +147,7 @@ export const BeachbreakListItem:
 
                         {!showPlaceholder && !loading &&
                             <div className="videoWrapper">
+                                
                                 <VideoPlayer videoUrl={videoUrl}></VideoPlayer>
                             </div>}
                     </div>

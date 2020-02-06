@@ -20,7 +20,8 @@ export const Compass: FunctionComponent<Props> = (props: Props) => {
                 boxShadow: "0px 3px 5px -1px rgba(0,0,0,0.2), 0px 6px 10px 0px rgba(0,0,0,0.14), 0px 1px 18px 0px rgba(0,0,0,0.12)" 
                 }}>
                 <div style={{
-                    transform: `rotate(${degrees}deg)`, color: "white", position: "fixed",
+                    transform: `rotate(${degrees}deg)`, 
+                    color: "white",
                     width: "45px",
                     height: "45px",
                     textAlign: "center", display: "flex"
