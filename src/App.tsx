@@ -6,8 +6,9 @@ import { CircularProgress } from "@material-ui/core";
 import { NewBeachbreakForm } from "./components/NewBeachbreakForm";
 import { Beachbreak } from "./models/beachbreak";
 import { BeachbreakList } from "./components/BeachbreakList";
+
 // import { Map } from "./components/Map";
-import { baseUrl, locationIqUrl } from "./constants";
+import { baseUrl, locationIqUrl, baseDevUrl } from "./constants";
 import { mockData } from "./mockData";
 import "./App.css";
 
@@ -53,7 +54,7 @@ class App extends Component<{}, State> {
       loading: true
     })
     request
-      .get(baseUrl)
+      .get(baseDevUrl)
       .then(res => this.setState({ beachbreaks: res.body }))
       .catch(e => console.warn(e))
       .finally(() => this.setState({ loading: false }))
