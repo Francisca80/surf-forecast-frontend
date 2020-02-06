@@ -17,7 +17,7 @@ export const Compass: FunctionComponent<Props> = (props: Props) => {
                 backgroundColor: "rgb(45, 155, 136)", 
                 width: 45, 
                 height: 45,
-                boxShadow: "0px 3px 5px -1px rgba(0,0,0,0.2), 0px 6px 10px 0px rgba(0,0,0,0.14), 0px 1px 18px 0px rgba(0,0,0,0.12)" 
+                boxShadow: "inset 0 0 8px 0.1px rgb(36, 129, 114)"
                 }}>
                 <div style={{
                     transform: `rotate(${degrees}deg)`, 
