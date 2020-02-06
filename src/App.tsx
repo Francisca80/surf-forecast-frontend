@@ -91,7 +91,7 @@ class App extends Component<{}, State> {
       .catch(e => console.warn(e))
   };
 
-  private handleBeachbreakChange = (event: React.ChangeEvent<HTMLInputElement>) => 
+  private handleBeachbreakChange = (event: React.ChangeEvent<HTMLInputElement>) =>
     this.setState({
       searchBeachInput: event.target.value
     })
@@ -115,27 +115,32 @@ class App extends Component<{}, State> {
     return (
 
       <div className="App">
-        <h2 className="title">Surf forecast</h2>
+        <div>
+          <h2 className="title">Surf forecast</h2>
 
-        <NewBeachbreakForm
-          beachbreak={newBeachbreak}
-          onAdd={this.addBeachbreak}
-          onChange={this.handleBeachbreakChange}
-        />
-
-        {<div className={!loading ? 'fade-in' : ''}>
-          <BeachbreakList
-            loading={loading}
-            beachbreaks={beachbreaks}
-            onDelete={this.deleteBeachbreak}
+          <NewBeachbreakForm
+            beachbreak={newBeachbreak}
+            onAdd={this.addBeachbreak}
+            onChange={this.handleBeachbreakChange}
           />
-        </div>}
 
-        {loading && <div className="styleProgressCircle">
-          <CircularProgress size={140} color="primary" />
-        </div>}
+          {<div className={!loading ? 'fade-in' : ''}>
+            <BeachbreakList
+              loading={loading}
+              beachbreaks={beachbreaks}
+              onDelete={this.deleteBeachbreak}
+            />
+          </div>}
 
-        {/* <Map /> */}
+          {loading && <div className="styleProgressCircle">
+            <CircularProgress size={140} color="primary" />
+          </div>}
+          <div className="ocean">
+            <div className="wave"></div>
+            <div className="wave"></div>
+          </div>
+          {/* <Map /> */}
+        </div>
       </div>
     );
   }
