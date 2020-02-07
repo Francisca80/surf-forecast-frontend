@@ -8,7 +8,7 @@ import { Beachbreak } from "./models/beachbreak";
 import { BeachbreakList } from "./components/BeachbreakList";
 
 // import { Map } from "./components/Map";
-import { baseUrl, locationIqUrl, baseDevUrl } from "./constants";
+import { baseUrl, locationIqUrl } from "./constants";
 import { mockData } from "./mockData";
 import "./App.css";
 
@@ -135,9 +135,17 @@ class App extends Component<{}, State> {
           {loading && <div className="styleProgressCircle">
             <CircularProgress size={140} color="primary" />
           </div>}
+          
           <div className="ocean">
             <div className="wave"></div>
             <div className="wave"></div>
+            <div className="surfing">
+            <div className="board-wrap">
+      <div className="board-body">
+      </div>
+      
+      </div>
+      </div>
           </div>
           {/* <Map /> */}
         </div>
