@@ -2,6 +2,7 @@ import React, { FunctionComponent } from "react";
 
 export const Surfer: FunctionComponent<any> = () => {
   return (
+    <div className="sob-wrapper">
     <div className="sob">
       <div className="sob-head">
         <div className="sob-face">
@@ -31,6 +32,7 @@ export const Surfer: FunctionComponent<any> = () => {
 
           <div className="sob-leg sob-leg-left"></div>
           <div className="sob-leg sob-leg-right"></div>
+        </div>
         </div>
       </div>{" "}
     </div>
