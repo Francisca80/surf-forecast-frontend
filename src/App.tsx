@@ -150,17 +150,12 @@ class App extends Component<{}, State> {
           <div className="ocean">
             <div className="wave"></div>
             <div className="wave"></div>
-    
 
             <div className="surfing">
               <div className="board-wrap">
                 <Surfer />
 
                 <div className="board-body"></div>
-            
-
-                
-
               </div>
             </div>
           </div>
