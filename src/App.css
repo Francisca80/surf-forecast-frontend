@@ -78,11 +78,10 @@ span {
 html, body { height: 100%; }
 body {
   background:radial-gradient(ellipse at center, rgba(255,254,234,1) 0%, rgba(255,254,234,1) 35%, #B7E8EB 100%);
-  overflow: hidden;
+
 }
 
 .ocean { 
-
   height: 5vw;
   width:100vw;
   position:absolute;
@@ -128,16 +127,15 @@ body {
 .surfing{
   position: absolute;
     left: 100%;
-    top: 40%;
-    margin: -50px 0 0 -50px;
+    top: 50%;
+    margin: -50px 0 0 0px;
     transform: translate3d(0, 0, 0);
     animation: wave 7s cubic-bezier( 0.36, 0.45, 0.63, 0.53) -.125s infinite, swell 7s ease -1.25s infinite;;
 }
 
 .board-wrap {
   position: relative;
-  top:-150px;
-  z-index: 2;
+  top:-250px;
   width: 150px;
   height: 50px;
   -webkit-transform: rotate(10deg);
@@ -155,3 +153,6 @@ body {
       border-top: none;
       box-shadow: -5px -5px 3px rgba(0, 0, 0, 0.3) inset;
   }
+
+    
+  
