@@ -37,6 +37,7 @@ const useStyles = makeStyles(theme => ({
 
 const styleForList = () => {
     return {
+        
         fontFamily: "Montserrat",
         fontSize: "12px",
         maxWidth: "fit-content",

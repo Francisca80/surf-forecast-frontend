@@ -11,6 +11,7 @@ span {
 
 .App {
   text-align: left;
+  min-width: 650px;
 }
 
 .addBeachbreak {
@@ -58,6 +59,7 @@ span {
   animation: fadeIn ease-in 1;
   animation-fill-mode: forwards;
   animation-duration: 1s;
+  margin-bottom: 17.5rem;
 }
 
 .styleProgressCircle {
@@ -78,17 +80,20 @@ span {
 html,
 body {
   height: 100%;
-  overflow: scroll;
-}
-body {
-  background: radial-gradient(ellipse at center, rgba(255, 254, 234, 1) 0%, rgba(255, 254, 234, 1) 35%, #b7e8eb 100%);
-  overflow: scroll;
+  overflow-y: scroll;
+  overflow-x: hidden;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 254, 234, 1) 0%,
+    rgba(255, 254, 234, 1) 35%,
+    #b7e8eb 100%
+  );
 }
 
 .ocean {
   /* top: 360px; */
-  height: 5vw;
-  width: 100vw;
+  height: 5%;
+  width: 100%;
   position: absolute;
   bottom: 0;
   left: 0;
@@ -96,7 +101,8 @@ body {
 }
 
 .wave {
-  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/85486/wave.svg) repeat-x;
+  background: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/85486/wave.svg)
+    repeat-x;
   position: absolute;
   top: -198px;
   width: 6400px;
@@ -107,7 +113,8 @@ body {
 
 .wave:nth-of-type(2) {
   top: -175px;
-  animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) -0.125s infinite, swell 7s ease -1.25s infinite;
+  animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) -0.125s infinite,
+    swell 7s ease -1.25s infinite;
   opacity: 1;
 }
 
@@ -116,7 +123,7 @@ body {
     margin-left: 0;
   }
   100% {
-    margin-left: -1600px;
+    margin-left: -2400px;
   }
 }
 
@@ -133,16 +140,16 @@ body {
 .surfing {
   position: absolute;
   left: 100%;
-  top: 40%;
-  margin: -50px 0 0 -50px;
+  top: 50%;
+  margin: -50px 0 0 0px;
   transform: translate3d(0, 0, 0);
-  animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) -0.125s infinite, swell 7s ease -1.25s infinite;
+  animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) -0.125s infinite,
+    swell 7s ease -1.25s infinite;
 }
 
 .board-wrap {
   position: relative;
   top: -150px;
-  z-index: 2;
   width: 150px;
   height: 50px;
   -webkit-transform: rotate(10deg);
@@ -159,4 +166,55 @@ body {
   border-radius: 190px / 41px;
   border-top: none;
   box-shadow: -5px -5px 3px rgba(0, 0, 0, 0.3) inset;
+}
+
+@media only screen and (max-width: 650px) {
+  html,
+  body {
+    font-size: 10px;
+    height: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background: radial-gradient(
+      ellipse at center,
+      rgba(255, 254, 234, 1) 0%,
+      rgba(255, 254, 234, 1) 35%,
+      #b7e8eb 100%
+    );
+  }
+
+  .surfing {
+    position: absolute;
+    left: 100%;
+    top: 50%;
+    margin: -50px 0 0 0px;
+    transform: translate3d(0, 0, 0);
+    animation: wave 7s cubic-bezier(0.36, 0.45, 0.63, 0.53) -0.125s infinite,
+      swell 7s ease -1.25s infinite;
+  }
+
+  .board-wrap {
+    position: relative;
+    top: -100px;
+    width: 150px;
+    height: 50px;
+    -webkit-transform: rotate(10deg);
+    -moz-transform: rotate(10deg);
+    -o-transform: rotate(10deg);
+    -ms-transform: rotate(10deg);
+    transform: rotate(10deg);
+  }
+
+  .board-body {
+    width: 208px;
+    height: 50px;
+    background: linear-gradient(#3333ff, teal, #3d8f81);
+    border-radius: 190px / 41px;
+    border-top: none;
+    box-shadow: -5px -5px 3px rgba(0, 0, 0, 0.3) inset;
+  }
+
+  .beachbreakList {
+    background-color: whitesmoke;
+  }
 }
