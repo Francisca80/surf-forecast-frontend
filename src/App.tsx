@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 import request from "superagent";
 import { CircularProgress } from "@material-ui/core";
+import Button from '@material-ui/core/Button';
 
 import { NewBeachbreakForm } from "./components/NewBeachbreakForm";
 import { Beachbreak } from "./models/beachbreak";
@@ -21,6 +22,7 @@ interface State {
   longitude: string;
   searchBeachInput: string;
   loading: boolean;
+  showAnimation: boolean;
 }
 
 class App extends Component<{}, State> {
@@ -34,7 +36,8 @@ class App extends Component<{}, State> {
     latitude: "",
     longitude: "",
     searchBeachInput: "",
-    loading: true
+    loading: true,
+    showAnimation: true
   };
 
   componentDidMount() {
@@ -117,11 +120,14 @@ class App extends Component<{}, State> {
       .catch(e => console.warn(e));
   };
 
+  private toggleAnimation = () => this.setState({ showAnimation: !this.state.showAnimation })
+
   render() {
-    const { newBeachbreak, beachbreaks, loading } = this.state;
+    const { newBeachbreak, beachbreaks, loading, showAnimation } = this.state;
 
     return (
       <div className="App">
+        <Button onClick={() => this.toggleAnimation()}>disable animation</Button>
         <div>
           <h2 className="title">Surf forecast</h2>
 
@@ -147,18 +153,20 @@ class App extends Component<{}, State> {
             </div>
           )}
 
-          <div className="ocean">
-            <div className="wave"></div>
-            <div className="wave"></div>
+          {showAnimation &&
+            <div className="ocean">
+              <div className="wave"></div>
+              <div className="wave"></div>
 
-            <div className="surfing">
-              <div className="board-wrap">
-                <Surfer />
+              <div className="surfing">
+                <div className="board-wrap">
+                  <Surfer />
 
-                <div className="board-body"></div>
+                  <div className="board-body"></div>
+                </div>
               </div>
             </div>
-          </div>
+          }
 
           {/* <Map /> */}
         </div>
