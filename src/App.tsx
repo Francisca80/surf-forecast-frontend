@@ -58,11 +58,19 @@ class App extends Component<{}, State> {
     this.setState({
       loading: true
     });
-    request
-      .get(baseUrl)
-      .then(res => this.setState({ beachbreaks: res.body }))
-      .catch(e => console.warn(e))
-      .finally(() => this.setState({ loading: false }));
+    if (process.env.NODE_ENV === "development") {
+      request
+        .get(baseDevUrl)
+        .then(res => this.setState({ beachbreaks: res.body }))
+        .catch(e => console.warn(e))
+        .finally(() => this.setState({ loading: false }));
+    } else {
+      request
+        .get(baseUrl)
+        .then(res => this.setState({ beachbreaks: res.body }))
+        .catch(e => console.warn(e))
+        .finally(() => this.setState({ loading: false }));
+    }
   };
 
   private addBeachbreak = (event: React.FormEvent<HTMLFormElement>) => {
@@ -72,6 +80,7 @@ class App extends Component<{}, State> {
     const lastBeach: any = this.state.beachbreaks[index];
 
     event.preventDefault();
+
 
     request
       .get(
@@ -89,11 +98,19 @@ class App extends Component<{}, State> {
             longitude: firstHit.lon
           }
         });
-        request
-          .post(baseUrl)
-          .send(this.state.newBeachbreak)
-          .then(() => this.getAllBeaches())
-          .catch(e => console.warn(e));
+        if (process.env.NODE_ENV === "development") {
+          request
+            .post(baseDevUrl)
+            .send(this.state.newBeachbreak)
+            .then(() => this.getAllBeaches())
+            .catch(e => console.warn(e));
+        } else {
+          request
+            .post(baseUrl)
+            .send(this.state.newBeachbreak)
+            .then(() => this.getAllBeaches())
+            .catch(e => console.warn(e));
+        }
       })
       .catch(e => console.warn(e));
   };
