@@ -6,7 +6,8 @@ import {
     Divider,
     CircularProgress,
     makeStyles,
-    Typography
+    Typography,
+    ListItemAvatar
 } from '@material-ui/core';
 
 import { StyledCamIcon, StyledFab, StyledIcon, StyledPaper } from "../shared/StyledComponents";
@@ -16,6 +17,7 @@ import sea from "../assets/sea.svg";
 
 import { VideoPlayer } from "./Player";
 import "./BeachbreakListItem.css";
+import { Compass } from "./Compass";
 
 export interface Props {
     beachbreak: Beachbreak;
@@ -35,6 +37,7 @@ const useStyles = makeStyles(theme => ({
 
 const styleForList = () => {
     return {
+        
         fontFamily: "Montserrat",
         fontSize: "12px",
         maxWidth: "fit-content",
@@ -104,13 +107,16 @@ export const BeachbreakListItem:
                         <Typography style={styleForList()}>{beachbreak.windspeedvalue}m/s</Typography>
                     }>
                     </ListItemText>
-                    {/*TODO: make an arrow out of the below value
-                    write the logic outside of this return statement */}
-                    <ListItemText disableTypography primary={
-                        <Typography style={styleForList()}>{beachbreak.winddirectionvalue}°</Typography>
-                    }>
-                    </ListItemText>
 
+                    {/* <ListItemText disableTypography primary={
+                        <Typography style={styleForList()}>{beachbreak.winddirectionvalue}°</Typography>
+
+                    }> */}
+
+                    {/* </ListItemText> */}
+                    <ListItemAvatar>
+                        <Compass degrees={beachbreak.winddirectionvalue}></Compass>
+                    </ListItemAvatar>
 
                     <div className="waveImgWrapper">
                         <img alt="wave" src={sea}></img>
@@ -140,10 +146,10 @@ export const BeachbreakListItem:
                             </div>
                         </div>
 
-                        {!showPlaceholder && !loading && 
-                        <div className="videoWrapper">
-                            <VideoPlayer videoUrl={videoUrl}></VideoPlayer>
-                        </div>}
+                        {!showPlaceholder && !loading &&
+                            <div className="videoWrapper">
+                                <VideoPlayer videoUrl={videoUrl}></VideoPlayer>
+                            </div>}
                     </div>
                 )}
                 {loading &&

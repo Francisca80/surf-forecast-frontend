@@ -19,20 +19,21 @@ export const BeachbreakList: FunctionComponent<Props> = ({ beachbreaks, onDelete
     return (
         <StyledList>
             {!loading && <div className="subheaderContainer">
-                <ListSubheader></ListSubheader>
+                <ListSubheader>{"    "}</ListSubheader>
                 <ListSubheader>Beach</ListSubheader>
                 <ListSubheader>Swell period</ListSubheader>
                 <ListSubheader>Wind speed</ListSubheader>
                 <ListSubheader>Wind direction</ListSubheader>
                 <ListSubheader>Wave height</ListSubheader>
                 <ListSubheader></ListSubheader>
+                <ListSubheader></ListSubheader>
             </div>}
 
             {!loading && <React.Fragment>
                 {beachbreaks.map(beachbreak => (
-                <BeachbreakListItem key={beachbreak.id} beachbreak={beachbreak} onDelete={onDelete} />
-            ))}
-                </React.Fragment>}
+                    <BeachbreakListItem key={beachbreak.id} beachbreak={beachbreak} onDelete={onDelete} />
+                ))}
+            </React.Fragment>}
         </StyledList>
     );
 };

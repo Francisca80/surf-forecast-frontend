@@ -16,7 +16,7 @@ export const NewBeachbreakForm: FunctionComponent<Props> = ({
   onAdd
 }) => {
   return (
-    <div style={{ margin: "0 auto", width: "fit-content" }}>
+    <div style={{ margin: "0 auto", marginBottom: "50px", width: "fit-content", textAlign: "center" }}>
       <form onSubmit={onAdd}>
         <TextField onChange={onChange}  id="beachbreak" label="Find beach" />
         <StyledFabAddBeach color="primary" aria-label="add" type="submit" className="styled-fab">
