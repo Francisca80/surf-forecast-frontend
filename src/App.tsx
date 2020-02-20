@@ -9,7 +9,7 @@ import { Beachbreak } from "./models/beachbreak";
 import { BeachbreakList } from "./components/BeachbreakList";
 
 // import { Map } from "./components/Map";
-import { baseUrl, locationIqUrl } from "./constants";
+import { baseUrl, baseDevUrl, locationIqUrl } from "./constants";
 import { mockData } from "./mockData";
 import "./App.css";
 import "./components/Surfer.css";
@@ -106,18 +106,33 @@ class App extends Component<{}, State> {
     });
 
   private deleteBeachbreak = (beachbreakToDelete: Beachbreak) => {
-    request
-      .delete(`${baseUrl}/${beachbreakToDelete.id}`)
-      .then(() =>
-        this.setState(previousState => ({
-          beachbreaks: [
-            ...previousState.beachbreaks.filter(
-              beachbreak => beachbreak.id !== beachbreakToDelete.id
-            )
-          ]
-        }))
-      )
-      .catch(e => console.warn(e));
+    if (process.env.NODE_ENV === "development") {
+      request
+        .delete(`${baseDevUrl}/${beachbreakToDelete.id}`)
+        .then(() =>
+          this.setState(previousState => ({
+            beachbreaks: [
+              ...previousState.beachbreaks.filter(
+                beachbreak => beachbreak.id !== beachbreakToDelete.id
+              )
+            ]
+          }))
+        )
+        .catch(e => console.warn(e));
+    } else {
+      request
+        .delete(`${baseUrl}/${beachbreakToDelete.id}`)
+        .then(() =>
+          this.setState(previousState => ({
+            beachbreaks: [
+              ...previousState.beachbreaks.filter(
+                beachbreak => beachbreak.id !== beachbreakToDelete.id
+              )
+            ]
+          }))
+        )
+        .catch(e => console.warn(e));
+    }
   };
 
   private toggleAnimation = () => this.setState({ showAnimation: !this.state.showAnimation })
